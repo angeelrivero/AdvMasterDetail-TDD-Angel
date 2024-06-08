@@ -69,7 +69,7 @@ public class CategoryListPresenter implements CategoryListContract.Presenter {
 
 
   @Override
-  public void selectCategoryListData(CategoryItem item) {
+  public void selectedCategoryData(CategoryItem item) {
     //router.passDataToProductListScreen(item);
     //passDataToProductListScreen(item);
     mediator.setCategory(item);

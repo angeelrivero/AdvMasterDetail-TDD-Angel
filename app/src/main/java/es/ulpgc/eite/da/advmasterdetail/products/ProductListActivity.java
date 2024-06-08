@@ -3,13 +3,8 @@ package es.ulpgc.eite.da.advmasterdetail.products;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -93,7 +88,7 @@ public class ProductListActivity
 
     listAdapter = new ProductListAdapter(view -> {
       ProductItem item = (ProductItem) view.getTag();
-      presenter.selectProductListData(item);
+      presenter.selectedProductData(item);
     });
 
     RecyclerView recyclerView = findViewById(R.id.product_recycler);
@@ -110,16 +105,19 @@ public class ProductListActivity
 
   @Override
   public void displayProductListData(final ProductListViewModel viewModel) {
-    //Log.e(TAG, "displayProductListData");
+    Log.e(TAG, "displayProductListData");
 
     runOnUiThread(() -> {
 
+      /*
       // deal with the data
       CategoryItem category = viewModel.category;
-      /*if (actionBar != null) {
+      if (actionBar != null) {
         actionBar.setTitle(category.content);
-      }*/
+      }
+      */
 
+      // deal with the data
       listAdapter.setItems(viewModel.products);
     });
 

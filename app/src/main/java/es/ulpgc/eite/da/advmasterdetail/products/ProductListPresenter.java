@@ -90,7 +90,7 @@ public class ProductListPresenter implements ProductListContract.Presenter {
 
 
   @Override
-  public void selectProductListData(ProductItem item) {
+  public void selectedProductData(ProductItem item) {
     //router.passDataToProductDetailScreen(item);
     //passDataToProductDetailScreen(item);
     mediator.setProduct(item);

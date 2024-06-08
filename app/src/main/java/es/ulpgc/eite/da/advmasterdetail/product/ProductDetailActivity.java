@@ -69,7 +69,7 @@ public class ProductDetailActivity
 
   @Override
   public void displayProductDetailData(ProductDetailViewModel viewModel) {
-    //Log.e(TAG, "displayProductDetailData");
+    Log.e(TAG, "displayProductDetailData");
 
     // deal with the data
     ProductItem product = viewModel.product;

@@ -23,7 +23,7 @@ interface ProductListContract {
     //void injectRouter(Router router);
 
     void fetchProductListData();
-    void selectProductListData(ProductItem item);
+    void selectedProductData(ProductItem item);
 
     void onCreateCalled();
 

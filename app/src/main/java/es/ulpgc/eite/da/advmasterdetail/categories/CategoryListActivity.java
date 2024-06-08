@@ -3,11 +3,8 @@ package es.ulpgc.eite.da.advmasterdetail.categories;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -89,7 +86,7 @@ public class CategoryListActivity
 
     listAdapter = new CategoryListAdapter(view -> {
       CategoryItem item = (CategoryItem) view.getTag();
-      presenter.selectCategoryListData(item);
+      presenter.selectedCategoryData(item);
     });
 
     RecyclerView recyclerView = findViewById(R.id.category_recycler);

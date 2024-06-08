@@ -22,7 +22,7 @@ interface CategoryListContract {
     //void injectRouter(Router router);
 
     void fetchCategoryListData();
-    void selectCategoryListData(CategoryItem item);
+    void selectedCategoryData(CategoryItem item);
 
     void onCreateCalled();
 

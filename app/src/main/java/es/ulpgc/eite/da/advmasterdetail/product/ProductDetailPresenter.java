@@ -4,6 +4,7 @@ import java.lang.ref.WeakReference;
 
 import es.ulpgc.eite.da.advmasterdetail.app.CatalogMediator;
 import es.ulpgc.eite.da.advmasterdetail.categories.CategoryListState;
+import es.ulpgc.eite.da.advmasterdetail.data.CategoryItem;
 import es.ulpgc.eite.da.advmasterdetail.data.ProductItem;
 
 
@@ -58,6 +59,16 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
 //  }
 
   private ProductItem getDataFromProductListScreen() {
+
+    // set passed state
+    CategoryItem category = mediator.getCategory();
+    //CategoryItem category = getDataFromCategoryListScreen();
+    //CategoryItem category = router.getDataFromCategoryListScreen();
+
+    if (category != null) {
+      state.category = category;
+    }
+
     ProductItem product = mediator.getProduct();
     return product;
   }

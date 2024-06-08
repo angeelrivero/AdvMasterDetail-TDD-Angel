@@ -61,22 +61,18 @@ public class CatalogRepository implements RepositoryContract {
   public void loadCatalog(
       final boolean clearFirst, final FetchCatalogDataCallback callback) {
 
-    AsyncTask.execute(new Runnable() {
+    AsyncTask.execute(() -> {
+      if(clearFirst) {
+        database.clearAllTables();
+      }
 
-      @Override
-      public void run() {
-        if(clearFirst) {
-          database.clearAllTables();
-        }
+      boolean error = false;
+      if(getCategoryDao().loadCategories().size() == 0 ) {
+        error = !loadCatalogFromJSON(loadJSONFromAsset());
+      }
 
-        boolean error = false;
-        if(getCategoryDao().loadCategories().size() == 0 ) {
-          error = !loadCatalogFromJSON(loadJSONFromAsset());
-        }
-
-        if(callback != null) {
-          callback.onCatalogDataFetched(error);
-        }
+      if(callback != null) {
+        callback.onCatalogDataFetched(error);
       }
     });
 
@@ -94,13 +90,9 @@ public class CatalogRepository implements RepositoryContract {
   public void getProductList(
       final int categoryId, final GetProductListCallback callback) {
 
-    AsyncTask.execute(new Runnable() {
-
-      @Override
-      public void run() {
-        if(callback != null) {
-          callback.setProductList(getProductDao().loadProducts(categoryId));
-        }
+    AsyncTask.execute(() -> {
+      if(callback != null) {
+        callback.setProductList(getProductDao().loadProducts(categoryId));
       }
     });
 
@@ -110,13 +102,9 @@ public class CatalogRepository implements RepositoryContract {
   @Override
   public void getProduct(final int id, final GetProductCallback callback) {
 
-    AsyncTask.execute(new Runnable() {
-
-      @Override
-      public void run() {
-        if(callback != null) {
-          callback.setProduct(getProductDao().loadProduct(id));
-        }
+    AsyncTask.execute(() -> {
+      if(callback != null) {
+        callback.setProduct(getProductDao().loadProduct(id));
       }
     });
   }
@@ -124,13 +112,9 @@ public class CatalogRepository implements RepositoryContract {
   @Override
   public void getCategory(final int id, final GetCategoryCallback callback) {
 
-    AsyncTask.execute(new Runnable() {
-
-      @Override
-      public void run() {
-        if(callback != null) {
-          callback.setCategory(getCategoryDao().loadCategory(id));
-        }
+    AsyncTask.execute(() -> {
+      if(callback != null) {
+        callback.setCategory(getCategoryDao().loadCategory(id));
       }
     });
 
@@ -138,13 +122,9 @@ public class CatalogRepository implements RepositoryContract {
 
   @Override
   public void getCategoryList(final GetCategoryListCallback callback) {
-    AsyncTask.execute(new Runnable() {
-
-      @Override
-      public void run() {
-        if(callback != null) {
-          callback.setCategoryList(getCategoryDao().loadCategories());
-        }
+    AsyncTask.execute(() -> {
+      if(callback != null) {
+        callback.setCategoryList(getCategoryDao().loadCategories());
       }
     });
 
@@ -154,14 +134,10 @@ public class CatalogRepository implements RepositoryContract {
   public void deleteProduct(
       final ProductItem product, final DeleteProductCallback callback) {
 
-    AsyncTask.execute(new Runnable() {
-
-      @Override
-      public void run() {
-        if(callback != null) {
-          getProductDao().deleteProduct(product);
-          callback.onProductDeleted();
-        }
+    AsyncTask.execute(() -> {
+      if(callback != null) {
+        getProductDao().deleteProduct(product);
+        callback.onProductDeleted();
       }
     });
   }
@@ -170,14 +146,10 @@ public class CatalogRepository implements RepositoryContract {
   public void updateProduct(
       final ProductItem product, final UpdateProductCallback callback) {
 
-    AsyncTask.execute(new Runnable() {
-
-      @Override
-      public void run() {
-        if(callback != null) {
-          getProductDao().updateProduct(product);
-          callback.onProductUpdated();
-        }
+    AsyncTask.execute(() -> {
+      if(callback != null) {
+        getProductDao().updateProduct(product);
+        callback.onProductUpdated();
       }
     });
   }
@@ -187,14 +159,10 @@ public class CatalogRepository implements RepositoryContract {
   public void deleteCategory(
       final CategoryItem category, final DeleteCategoryCallback callback) {
 
-    AsyncTask.execute(new Runnable() {
-
-      @Override
-      public void run() {
-        if(callback != null) {
-          getCategoryDao().deleteCategory(category);
-          callback.onCategoryDeleted();
-        }
+    AsyncTask.execute(() -> {
+      if(callback != null) {
+        getCategoryDao().deleteCategory(category);
+        callback.onCategoryDeleted();
       }
     });
   }
@@ -203,14 +171,10 @@ public class CatalogRepository implements RepositoryContract {
   public void updateCategory(
       final CategoryItem category, final UpdateCategoryCallback callback) {
 
-    AsyncTask.execute(new Runnable() {
-
-      @Override
-      public void run() {
-        if(callback != null) {
-          getCategoryDao().updateCategory(category);
-          callback.onCategoryUpdated();
-        }
+    AsyncTask.execute(() -> {
+      if(callback != null) {
+        getCategoryDao().updateCategory(category);
+        callback.onCategoryUpdated();
       }
     });
   }

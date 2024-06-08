@@ -8,7 +8,6 @@ import es.ulpgc.eite.da.advmasterdetail.data.ProductItem;
 
 public class ProductListViewModel {
 
-  public CategoryItem category;
   public List<ProductItem> products;
 
 }
