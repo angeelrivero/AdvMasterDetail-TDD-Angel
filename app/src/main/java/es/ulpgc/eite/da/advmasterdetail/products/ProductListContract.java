@@ -28,6 +28,8 @@ interface ProductListContract {
     void onCreateCalled();
 
     void onRecreateCalled();
+
+      void onPauseCalled();
   }
 
   interface Model {

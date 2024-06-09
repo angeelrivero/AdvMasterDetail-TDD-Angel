@@ -60,4 +60,5 @@ dependencies {
     androidTestImplementation libs.uiautomator
     androidTestImplementation libs.runner
     androidTestImplementation libs.rules
+    androidTestImplementation libs.androidx.espresso.contrib
 }

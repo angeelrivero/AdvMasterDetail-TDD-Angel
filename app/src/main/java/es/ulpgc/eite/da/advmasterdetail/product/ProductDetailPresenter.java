@@ -1,5 +1,7 @@
 package es.ulpgc.eite.da.advmasterdetail.product;
 
+import android.util.Log;
+
 import java.lang.ref.WeakReference;
 
 import es.ulpgc.eite.da.advmasterdetail.app.CatalogMediator;
@@ -14,6 +16,7 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
 
   private WeakReference<ProductDetailContract.View> view;
   private ProductDetailState state;
+  private ProductDetailViewModel viewModel;
   private ProductDetailContract.Model model;
   //private ProductDetailContract.Router router;
   private CatalogMediator mediator;
@@ -33,7 +36,9 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
     // Log.e(TAG, "onCreateCalled");
 
     state = new ProductDetailState();
-    mediator.setProductDetailState(state);
+    //mediator.setProductDetailState(state);
+
+    viewModel=new ProductDetailViewModel();
   }
 
   @Override
@@ -41,22 +46,17 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
     // Log.e(TAG, "onRecreateCalled");
 
     state = mediator.getProductDetailState();
+
+    viewModel=new ProductDetailViewModel();
   }
 
   @Override
-  public void injectView(WeakReference<ProductDetailContract.View> view) {
-    this.view = view;
+  public void onPauseCalled() {
+    Log.e(TAG, "onPauseCalled()");
+
+    mediator.setProductDetailState(state);
   }
 
-  @Override
-  public void injectModel(ProductDetailContract.Model model) {
-    this.model = model;
-  }
-
-//  @Override
-//  public void injectRouter(ProductDetailContract.Router router) {
-//    this.router = router;
-//  }
 
   private ProductItem getDataFromProductListScreen() {
 
@@ -79,6 +79,20 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
 
     // set passed state
     ProductItem product = getDataFromProductListScreen();
+    if(product != null) {
+      viewModel.product = product;
+    }
+
+    view.get().displayProductDetailData(viewModel);
+  }
+
+  /*
+  @Override
+  public void fetchProductDetailData() {
+    // Log.e(TAG, "fetchProductDetailData()");
+
+    // set passed state
+    ProductItem product = getDataFromProductListScreen();
     //ProductItem product = router.getDataFromProductListScreen();
     if(product != null) {
         state.product = product;
@@ -86,5 +100,22 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
 
     view.get().displayProductDetailData(state);
   }
+  */
+
+
+  @Override
+  public void injectView(WeakReference<ProductDetailContract.View> view) {
+    this.view = view;
+  }
+
+  @Override
+  public void injectModel(ProductDetailContract.Model model) {
+    this.model = model;
+  }
+
+//  @Override
+//  public void injectRouter(ProductDetailContract.Router router) {
+//    this.router = router;
+//  }
 
 }

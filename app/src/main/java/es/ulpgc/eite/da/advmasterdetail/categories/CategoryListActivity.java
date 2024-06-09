@@ -94,6 +94,17 @@ public class CategoryListActivity
     recyclerView.setAdapter(listAdapter);
   }
 
+  @Override
+  protected void onPause() {
+    super.onPause();
+
+    presenter.onPauseCalled();
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+  }
 
   @Override
   public void displayCategoryListData(final CategoryListViewModel viewModel) {

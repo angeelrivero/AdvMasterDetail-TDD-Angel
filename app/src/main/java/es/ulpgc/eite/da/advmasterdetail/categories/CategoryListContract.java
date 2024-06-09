@@ -27,6 +27,8 @@ interface CategoryListContract {
     void onCreateCalled();
 
     void onRecreateCalled();
+
+      void onPauseCalled();
   }
 
   interface Model {

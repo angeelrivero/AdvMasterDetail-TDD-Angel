@@ -8,16 +8,21 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 import static org.hamcrest.Matchers.allOf;
 
+import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
+import android.os.RemoteException;
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
+import androidx.test.uiautomator.UiDevice;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -38,12 +43,51 @@ public class MasterDetailTests {
   public ActivityTestRule<CategoryListActivity> testRule =
       new ActivityTestRule<>(CategoryListActivity.class);
 
+
+
+  private void rotate() {
+
+    CategoryListActivity activity = testRule.getActivity();
+    int orientation = activity.getRequestedOrientation();
+
+    if(orientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+      orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+
+    } else {
+      orientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+    }
+
+    activity.setRequestedOrientation(orientation);
+
+    try {
+
+      UiDevice device = UiDevice.getInstance(getInstrumentation());
+
+      if(orientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+        device.setOrientationNatural();
+
+      } else {
+        device.setOrientationLeft();
+      }
+
+    } catch (RemoteException e) {
+    }
+
+  }
+
+
   @Test
   public void appTest() {
+
+    rotate();
 
     onView(new RecyclerViewMatcher(R.id.category_recycler)
         .atPositionOnView(0, R.id.category_name))
         .check(matches(withText("Tenerife")));
+
+    // Scroll to the item at the specific position
+    onView(withId(R.id.category_recycler))
+        .perform(RecyclerViewActions.scrollToPosition(5));
 
     onView(new RecyclerViewMatcher(R.id.category_recycler)
         .atPositionOnView(5, R.id.category_name))
@@ -56,6 +100,8 @@ public class MasterDetailTests {
             .check(matches(withText("Gran Canaria")));
     recyclerView1.perform(click());
 
+    rotate();
+
     onView(new RecyclerViewMatcher(R.id.product_recycler)
         .atPositionOnView(0, R.id.product_name))
         .check(matches(withText("Beaches of Gran Canaria")));
@@ -67,11 +113,15 @@ public class MasterDetailTests {
 
     pressBack();
 
+    rotate();
 
     onView(new RecyclerViewMatcher(R.id.category_recycler)
         .atPositionOnView(0, R.id.category_name))
         .check(matches(withText("Tenerife")));
 
+    // Scroll to the item at the specific position
+    onView(withId(R.id.category_recycler))
+        .perform(RecyclerViewActions.scrollToPosition(4));
 
     ViewInteraction recyclerView2 =
         onView(new RecyclerViewMatcher(R.id.category_recycler)
@@ -79,6 +129,7 @@ public class MasterDetailTests {
             .check(matches(withText("La Palma")));
     recyclerView2.perform(click());
 
+    rotate();
 
     onView(new RecyclerViewMatcher(R.id.product_recycler)
         .atPositionOnView(1, R.id.product_name))
@@ -89,6 +140,8 @@ public class MasterDetailTests {
           .atPositionOnView(0, R.id.product_name))
           .check(matches(withText("Caldera de Taburiente National Park")));
     recyclerView3.perform(click());
+
+    rotate();
 
     ViewInteraction textView15 = onView(allOf(
         withId(R.id.product_detail),
@@ -113,15 +166,23 @@ public class MasterDetailTests {
 
     pressBack();
 
+    rotate();
+
     onView(new RecyclerViewMatcher(R.id.product_recycler)
         .atPositionOnView(1, R.id.product_name))
         .check(matches(withText("Santa Cruz de la Palma")));
 
     pressBack();
 
+    rotate();
+
     onView(new RecyclerViewMatcher(R.id.category_recycler)
         .atPositionOnView(0, R.id.category_name))
         .check(matches(withText("Tenerife")));
+
+    // Scroll to the item at the specific position
+    onView(withId(R.id.category_recycler))
+        .perform(RecyclerViewActions.scrollToPosition(5));
 
     onView(new RecyclerViewMatcher(R.id.category_recycler)
         .atPositionOnView(5, R.id.category_name))

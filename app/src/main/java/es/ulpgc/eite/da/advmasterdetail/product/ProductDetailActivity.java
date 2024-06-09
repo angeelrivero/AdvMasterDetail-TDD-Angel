@@ -68,6 +68,18 @@ public class ProductDetailActivity
   }
 
   @Override
+  protected void onPause() {
+    super.onPause();
+
+    presenter.onPauseCalled();
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+  }
+
+  @Override
   public void displayProductDetailData(ProductDetailViewModel viewModel) {
     Log.e(TAG, "displayProductDetailData");
 

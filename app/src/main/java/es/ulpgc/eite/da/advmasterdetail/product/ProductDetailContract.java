@@ -20,6 +20,8 @@ interface ProductDetailContract {
     void onCreateCalled();
 
     void onRecreateCalled();
+
+      void onPauseCalled();
   }
 
   interface Model {

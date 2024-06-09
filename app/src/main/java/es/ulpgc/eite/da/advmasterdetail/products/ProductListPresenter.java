@@ -1,5 +1,7 @@
 package es.ulpgc.eite.da.advmasterdetail.products;
 
+import android.util.Log;
+
 import java.lang.ref.WeakReference;
 import java.util.List;
 
@@ -15,6 +17,7 @@ public class ProductListPresenter implements ProductListContract.Presenter {
 
   private WeakReference<ProductListContract.View> view;
   private ProductListState state;
+  private ProductListViewModel viewModel;
   private ProductListContract.Model model;
   //private ProductListContract.Router router;
   private CatalogMediator mediator;
@@ -35,7 +38,9 @@ public class ProductListPresenter implements ProductListContract.Presenter {
     // Log.e(TAG, "onCreateCalled");
 
     state = new ProductListState();
-    mediator.setProductListState(state);
+    //mediator.setProductListState(state);
+
+    viewModel = new ProductListViewModel();
   }
 
   @Override
@@ -43,10 +48,18 @@ public class ProductListPresenter implements ProductListContract.Presenter {
     // Log.e(TAG, "onRecreateCalled");
 
     state = mediator.getProductListState();
+
+    viewModel = new ProductListViewModel();
   }
 
+  @Override
+  public void onPauseCalled() {
+    Log.e(TAG, "onPauseCalled()");
 
-//  @Override
+    mediator.setProductListState(state);
+  }
+
+  //  @Override
 //  public void injectRouter(ProductListContract.Router router) {
 //    this.router = router;
 //  }
@@ -65,6 +78,13 @@ public class ProductListPresenter implements ProductListContract.Presenter {
     }
 
     // call the model
+    model.fetchProductListData(state.category, products -> {
+      viewModel.products = products;
+
+      view.get().displayProductListData(viewModel);
+    });
+
+    /*// call the model
     model.fetchProductListData(state.category,
         new RepositoryContract.GetProductListCallback() {
 
@@ -74,7 +94,7 @@ public class ProductListPresenter implements ProductListContract.Presenter {
 
         view.get().displayProductListData(state);
       }
-    });
+    });*/
 
   }
 

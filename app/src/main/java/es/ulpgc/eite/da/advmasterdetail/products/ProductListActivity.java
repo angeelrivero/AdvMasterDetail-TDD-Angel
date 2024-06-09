@@ -75,6 +75,18 @@ public class ProductListActivity
     presenter.fetchProductListData();
   }
 
+  @Override
+  protected void onPause() {
+    super.onPause();
+
+    presenter.onPauseCalled();
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+  }
+
   private void initProductListContainer() {
 
     /*listAdapter = new ProductListAdapter( new View.OnClickListener() {
