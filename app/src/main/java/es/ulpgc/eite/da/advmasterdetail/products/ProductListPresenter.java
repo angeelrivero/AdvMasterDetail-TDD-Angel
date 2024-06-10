@@ -40,7 +40,7 @@ public class ProductListPresenter implements ProductListContract.Presenter {
     state = new ProductListState();
     //mediator.setProductListState(state);
 
-    viewModel = new ProductListViewModel();
+    //viewModel = new ProductListViewModel();
   }
 
   @Override
@@ -49,7 +49,7 @@ public class ProductListPresenter implements ProductListContract.Presenter {
 
     state = mediator.getProductListState();
 
-    viewModel = new ProductListViewModel();
+    //viewModel = new ProductListViewModel();
   }
 
   @Override
