@@ -16,7 +16,7 @@ public class CategoryListPresenter implements CategoryListContract.Presenter {
 
   private WeakReference<CategoryListContract.View> view;
   private CategoryListState state;
-  private CategoryListViewModel viewModel;
+  //private CategoryListViewModel viewModel;
   private CategoryListContract.Model model;
   //private CategoryListContract.Router router;
   private CatalogMediator mediator;
@@ -39,7 +39,7 @@ public class CategoryListPresenter implements CategoryListContract.Presenter {
     state = new CategoryListState();
     //mediator.setCategoryListState(state);
 
-    viewModel = new CategoryListViewModel();
+    //viewModel = new CategoryListViewModel();
   }
 
   @Override
@@ -48,7 +48,7 @@ public class CategoryListPresenter implements CategoryListContract.Presenter {
 
     state = mediator.getCategoryListState();
 
-    viewModel = new CategoryListViewModel();
+    //viewModel = new CategoryListViewModel();
   }
 
   @Override
@@ -62,19 +62,19 @@ public class CategoryListPresenter implements CategoryListContract.Presenter {
   public void fetchCategoryListData() {
     // Log.e(TAG, "fetchCategoryListData");
 
-    /*// call the model
+    // call the model
     model.fetchCategoryListData(categories -> {
       state.categories = categories;
 
       view.get().displayCategoryListData(state);
-    });*/
+    });
 
-    // call the model
+    /*// call the model
     model.fetchCategoryListData(categories -> {
       viewModel.categories = categories;
 
       view.get().displayCategoryListData(viewModel);
-    });
+    });*/
 
     /*// call the model
     model.fetchCategoryListData(categories -> {

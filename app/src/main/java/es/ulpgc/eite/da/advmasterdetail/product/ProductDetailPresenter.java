@@ -16,7 +16,7 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
 
   private WeakReference<ProductDetailContract.View> view;
   private ProductDetailState state;
-  private ProductDetailViewModel viewModel;
+  //private ProductDetailViewModel viewModel;
   private ProductDetailContract.Model model;
   //private ProductDetailContract.Router router;
   private CatalogMediator mediator;
@@ -38,7 +38,7 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
     state = new ProductDetailState();
     //mediator.setProductDetailState(state);
 
-    viewModel=new ProductDetailViewModel();
+    //viewModel=new ProductDetailViewModel();
   }
 
   @Override
@@ -47,7 +47,7 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
 
     state = mediator.getProductDetailState();
 
-    viewModel=new ProductDetailViewModel();
+    //viewModel=new ProductDetailViewModel();
   }
 
   @Override
@@ -73,6 +73,7 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
     return product;
   }
 
+  /*
   @Override
   public void fetchProductDetailData() {
     // Log.e(TAG, "fetchProductDetailData()");
@@ -85,8 +86,8 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
 
     view.get().displayProductDetailData(viewModel);
   }
+  */
 
-  /*
   @Override
   public void fetchProductDetailData() {
     // Log.e(TAG, "fetchProductDetailData()");
@@ -100,7 +101,6 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
 
     view.get().displayProductDetailData(state);
   }
-  */
 
 
   @Override

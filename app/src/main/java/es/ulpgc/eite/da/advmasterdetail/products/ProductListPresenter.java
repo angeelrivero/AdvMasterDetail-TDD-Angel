@@ -17,7 +17,7 @@ public class ProductListPresenter implements ProductListContract.Presenter {
 
   private WeakReference<ProductListContract.View> view;
   private ProductListState state;
-  private ProductListViewModel viewModel;
+  //private ProductListViewModel viewModel;
   private ProductListContract.Model model;
   //private ProductListContract.Router router;
   private CatalogMediator mediator;
@@ -77,24 +77,19 @@ public class ProductListPresenter implements ProductListContract.Presenter {
       state.category = category;
     }
 
-    // call the model
+    /*// call the model
     model.fetchProductListData(state.category, products -> {
       viewModel.products = products;
 
       view.get().displayProductListData(viewModel);
-    });
-
-    /*// call the model
-    model.fetchProductListData(state.category,
-        new RepositoryContract.GetProductListCallback() {
-
-      @Override
-      public void setProductList(List<ProductItem> products) {
-        state.products = products;
-
-        view.get().displayProductListData(state);
-      }
     });*/
+
+    // call the model
+    model.fetchProductListData(state.category, products -> {
+      state.products = products;
+
+      view.get().displayProductListData(state);
+    });
 
   }
 
