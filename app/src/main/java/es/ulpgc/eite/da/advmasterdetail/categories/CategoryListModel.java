@@ -22,6 +22,14 @@ public class CategoryListModel implements CategoryListContract.Model {
 
     Log.e(TAG, "fetchCategoryListData()");
 
+
+    repository.loadCatalog(true, error -> {
+      if (!error) {
+        repository.getCategoryList(callback);
+      }
+    });
+
+    /*
     repository.loadCatalog(
         true, new RepositoryContract.FetchCatalogDataCallback() {
 
@@ -32,6 +40,7 @@ public class CategoryListModel implements CategoryListContract.Model {
         }
       }
     });
+    */
 
   }
 
