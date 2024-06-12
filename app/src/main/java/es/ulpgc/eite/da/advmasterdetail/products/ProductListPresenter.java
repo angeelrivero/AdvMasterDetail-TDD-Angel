@@ -17,20 +17,12 @@ public class ProductListPresenter implements ProductListContract.Presenter {
 
   private WeakReference<ProductListContract.View> view;
   private ProductListState state;
-  //private ProductListViewModel viewModel;
   private ProductListContract.Model model;
-  //private ProductListContract.Router router;
   private CatalogMediator mediator;
 
   public ProductListPresenter(CatalogMediator mediator) {
     this.mediator = mediator;
-    //state = mediator.getProductListState();
   }
-
-
-//  public ProductListPresenter(ProductListState state) {
-//    this.state = state;
-//  }
 
 
   @Override
@@ -38,9 +30,6 @@ public class ProductListPresenter implements ProductListContract.Presenter {
     // Log.e(TAG, "onCreateCalled");
 
     state = new ProductListState();
-    //mediator.setProductListState(state);
-
-    //viewModel = new ProductListViewModel();
   }
 
   @Override
@@ -48,8 +37,6 @@ public class ProductListPresenter implements ProductListContract.Presenter {
     // Log.e(TAG, "onRecreateCalled");
 
     state = mediator.getProductListState();
-
-    //viewModel = new ProductListViewModel();
   }
 
   @Override
@@ -59,10 +46,6 @@ public class ProductListPresenter implements ProductListContract.Presenter {
     mediator.setProductListState(state);
   }
 
-  //  @Override
-//  public void injectRouter(ProductListContract.Router router) {
-//    this.router = router;
-//  }
 
   @Override
   public void fetchProductListData() {
@@ -70,19 +53,10 @@ public class ProductListPresenter implements ProductListContract.Presenter {
 
     // set passed state
     CategoryItem category = mediator.getCategory();
-    //CategoryItem category = getDataFromCategoryListScreen();
-    //CategoryItem category = router.getDataFromCategoryListScreen();
 
     if (category != null) {
       state.category = category;
     }
-
-    /*// call the model
-    model.fetchProductListData(state.category, products -> {
-      viewModel.products = products;
-
-      view.get().displayProductListData(viewModel);
-    });*/
 
     // call the model
     model.fetchProductListData(state.category, products -> {
@@ -93,23 +67,9 @@ public class ProductListPresenter implements ProductListContract.Presenter {
 
   }
 
-//  private void passDataToProductDetailScreen(ProductItem item) {
-//
-//    mediator.setProduct(item);
-//  }
-
-//  private CategoryItem getDataFromCategoryListScreen() {
-//    CategoryItem category = mediator.getCategory();
-//    return category;
-//  }
-
-
   @Override
   public void selectedProductData(ProductItem item) {
-    //router.passDataToProductDetailScreen(item);
-    //passDataToProductDetailScreen(item);
     mediator.setProduct(item);
-    //router.navigateToProductDetailScreen();
     view.get().navigateToProductDetailScreen();
   }
 

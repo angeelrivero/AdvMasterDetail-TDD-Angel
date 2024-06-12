@@ -29,28 +29,16 @@ public class ProductDetailActivity
 
   ProductDetailContract.Presenter presenter;
 
-  //private ActionBar actionBar;
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_product_detail);
     setTitle(R.string.title_product_detail);
 
-    /*Toolbar toolbar = findViewById(R.id.detail_toolbar);
-    setSupportActionBar(toolbar);
-
-    actionBar = getSupportActionBar();
-    if (actionBar != null) {
-      actionBar.setDisplayHomeAsUpEnabled(true);
-    }*/
-
     // do the setup
     ProductDetailScreen.configure(this);
 
     // do some work
-    //presenter.fetchProductDetailData();
-
     if(savedInstanceState == null) {
       presenter.onCreateCalled();
 
@@ -87,9 +75,6 @@ public class ProductDetailActivity
     ProductItem product = viewModel.product;
 
     if (product != null) {
-      /*if (actionBar != null) {
-        actionBar.setTitle(product.content);
-      }*/
 
       ((TextView) findViewById(R.id.product_detail)).setText(product.details);
       loadImageFromURL(
@@ -109,16 +94,6 @@ public class ProductDetailActivity
     reqBuilder.into(imageView);
   }
 
-
-//  @Override
-//  public boolean onOptionsItemSelected(MenuItem item) {
-//    int id = item.getItemId();
-//    if (id == android.R.id.home) {
-//      navigateUpTo(new Intent(this, ProductListActivity.class));
-//      return true;
-//    }
-//    return super.onOptionsItemSelected(item);
-//  }
 
   @Override
   public void injectPresenter(ProductDetailContract.Presenter presenter) {

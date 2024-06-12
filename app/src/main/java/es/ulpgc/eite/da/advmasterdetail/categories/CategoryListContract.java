@@ -19,7 +19,6 @@ interface CategoryListContract {
   interface Presenter {
     void injectView(WeakReference<View> view);
     void injectModel(Model model);
-    //void injectRouter(Router router);
 
     void fetchCategoryListData();
     void selectedCategoryData(CategoryItem item);
@@ -35,12 +34,5 @@ interface CategoryListContract {
     void fetchCategoryListData(
         RepositoryContract.GetCategoryListCallback callback);
   }
-
-
-//  interface Router {
-//
-//    void navigateToProductListScreen();
-//    void passDataToProductListScreen(CategoryItem item);
-//  }
 
 }

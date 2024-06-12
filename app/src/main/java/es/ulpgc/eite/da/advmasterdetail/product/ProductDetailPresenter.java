@@ -16,29 +16,18 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
 
   private WeakReference<ProductDetailContract.View> view;
   private ProductDetailState state;
-  //private ProductDetailViewModel viewModel;
   private ProductDetailContract.Model model;
-  //private ProductDetailContract.Router router;
   private CatalogMediator mediator;
 
   public ProductDetailPresenter(CatalogMediator mediator) {
     this.mediator = mediator;
-    //state = mediator.getProductDetailState();
   }
-
-//  public ProductDetailPresenter(ProductDetailState state) {
-//    this.state = state;
-//  }
-
 
   @Override
   public void onCreateCalled() {
     // Log.e(TAG, "onCreateCalled");
 
     state = new ProductDetailState();
-    //mediator.setProductDetailState(state);
-
-    //viewModel=new ProductDetailViewModel();
   }
 
   @Override
@@ -46,8 +35,6 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
     // Log.e(TAG, "onRecreateCalled");
 
     state = mediator.getProductDetailState();
-
-    //viewModel=new ProductDetailViewModel();
   }
 
   @Override
@@ -62,8 +49,6 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
 
     // set passed state
     CategoryItem category = mediator.getCategory();
-    //CategoryItem category = getDataFromCategoryListScreen();
-    //CategoryItem category = router.getDataFromCategoryListScreen();
 
     if (category != null) {
       state.category = category;
@@ -73,20 +58,6 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
     return product;
   }
 
-  /*
-  @Override
-  public void fetchProductDetailData() {
-    // Log.e(TAG, "fetchProductDetailData()");
-
-    // set passed state
-    ProductItem product = getDataFromProductListScreen();
-    if(product != null) {
-      viewModel.product = product;
-    }
-
-    view.get().displayProductDetailData(viewModel);
-  }
-  */
 
   @Override
   public void fetchProductDetailData() {
@@ -94,7 +65,6 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
 
     // set passed state
     ProductItem product = getDataFromProductListScreen();
-    //ProductItem product = router.getDataFromProductListScreen();
     if(product != null) {
         state.product = product;
     }
@@ -112,10 +82,5 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
   public void injectModel(ProductDetailContract.Model model) {
     this.model = model;
   }
-
-//  @Override
-//  public void injectRouter(ProductDetailContract.Router router) {
-//    this.router = router;
-//  }
 
 }

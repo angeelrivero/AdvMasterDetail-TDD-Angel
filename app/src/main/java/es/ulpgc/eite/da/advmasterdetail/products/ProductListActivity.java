@@ -22,7 +22,6 @@ public class ProductListActivity
   ProductListContract.Presenter presenter;
 
   private ProductListAdapter listAdapter;
-  //private ActionBar actionBar;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -30,34 +29,12 @@ public class ProductListActivity
     setContentView(R.layout.activity_product_list);
     setTitle(R.string.title_product_list);
 
-    /*Toolbar toolbar = findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
-
-    actionBar = getSupportActionBar();
-    if (actionBar != null) {
-      actionBar.setDisplayHomeAsUpEnabled(true);
-    }*/
-
-   /* listAdapter = new ProductListAdapter( new View.OnClickListener() {
-
-      @Override
-      public void onClick(View view) {
-        ProductItem item = (ProductItem) view.getTag();
-        presenter.selectProductListData(item);
-      }
-    });
-
-    RecyclerView recyclerView = findViewById(R.id.product_recycler);
-    recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    recyclerView.setAdapter(listAdapter);*/
-
     // do the setup
     ProductListScreen.configure(this);
 
-    // do some work
     initProductListContainer();
-    //presenter.fetchProductListData();
 
+    // do some work
     if(savedInstanceState == null) {
       presenter.onCreateCalled();
 
@@ -89,15 +66,6 @@ public class ProductListActivity
 
   private void initProductListContainer() {
 
-    /*listAdapter = new ProductListAdapter( new View.OnClickListener() {
-
-      @Override
-      public void onClick(View view) {
-        ProductItem item = (ProductItem) view.getTag();
-        presenter.selectProductListData(item);
-      }
-    });*/
-
     listAdapter = new ProductListAdapter(view -> {
       ProductItem item = (ProductItem) view.getTag();
       presenter.selectedProductData(item);
@@ -121,43 +89,11 @@ public class ProductListActivity
 
     runOnUiThread(() -> {
 
-      /*
-      // deal with the data
-      CategoryItem category = viewModel.category;
-      if (actionBar != null) {
-        actionBar.setTitle(category.content);
-      }
-      */
-
       // deal with the data
       listAdapter.setItems(viewModel.products);
     });
 
-    /*runOnUiThread(new Runnable() {
-
-      @Override
-      public void run() {
-
-        // deal with the data
-        CategoryItem category = viewModel.category;
-        *//*if (actionBar != null) {
-          actionBar.setTitle(category.content);
-        }*//*
-
-        listAdapter.setItems(viewModel.products);
-      }
-    });*/
   }
-
-//  @Override
-//  public boolean onOptionsItemSelected(MenuItem item) {
-//    int id = item.getItemId();
-//    if (id == android.R.id.home) {
-//      NavUtils.navigateUpFromSameTask(this);
-//      return true;
-//    }
-//    return super.onOptionsItemSelected(item);
-//  }
 
   @Override
   public void injectPresenter(ProductListContract.Presenter presenter) {

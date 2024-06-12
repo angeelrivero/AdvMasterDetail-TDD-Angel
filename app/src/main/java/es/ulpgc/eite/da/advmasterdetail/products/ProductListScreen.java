@@ -16,18 +16,14 @@ public class ProductListScreen {
     WeakReference<FragmentActivity> context =
         new WeakReference<>((FragmentActivity) view);
 
-    //CatalogMediator mediator = (CatalogMediator) context.get().getApplication();
     CatalogMediator mediator = CatalogMediator.getInstance();
-    //ProductListState state = mediator.getProductListState();
-    RepositoryContract repository = CatalogRepository.getInstance(context.get());
-
-    //ProductListContract.Router router = new ProductListRouter(mediator);
-    //ProductListContract.Presenter presenter = new ProductListPresenter(state);
     ProductListContract.Presenter presenter = new ProductListPresenter(mediator);
+
+    RepositoryContract repository = CatalogRepository.getInstance(context.get());
     ProductListModel model = new ProductListModel(repository);
+
     presenter.injectView(new WeakReference<>(view));
     presenter.injectModel(model);
-    //presenter.injectRouter(router);
     view.injectPresenter(presenter);
 
   }

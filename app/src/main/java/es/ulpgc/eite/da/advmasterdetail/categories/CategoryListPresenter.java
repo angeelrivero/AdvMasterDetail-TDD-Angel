@@ -16,30 +16,19 @@ public class CategoryListPresenter implements CategoryListContract.Presenter {
 
   private WeakReference<CategoryListContract.View> view;
   private CategoryListState state;
-  //private CategoryListViewModel viewModel;
   private CategoryListContract.Model model;
-  //private CategoryListContract.Router router;
   private CatalogMediator mediator;
 
 
   public CategoryListPresenter(CatalogMediator mediator) {
     this.mediator = mediator;
-    //state = mediator.getCategoryListState();
   }
-
-//  public CategoryListPresenter(CategoryListState state) {
-//    this.state = state;
-//  }
-
 
   @Override
   public void onCreateCalled() {
     // Log.e(TAG, "onCreateCalled");
 
     state = new CategoryListState();
-    //mediator.setCategoryListState(state);
-
-    //viewModel = new CategoryListViewModel();
   }
 
   @Override
@@ -47,8 +36,6 @@ public class CategoryListPresenter implements CategoryListContract.Presenter {
     // Log.e(TAG, "onRecreateCalled");
 
     state = mediator.getCategoryListState();
-
-    //viewModel = new CategoryListViewModel();
   }
 
   @Override
@@ -69,20 +56,6 @@ public class CategoryListPresenter implements CategoryListContract.Presenter {
       view.get().displayCategoryListData(state);
     });
 
-    /*// call the model
-    model.fetchCategoryListData(categories -> {
-      viewModel.categories = categories;
-
-      view.get().displayCategoryListData(viewModel);
-    });*/
-
-    /*// call the model
-    model.fetchCategoryListData(categories -> {
-      state.categories = categories;
-
-      view.get().displayCategoryListData(state);
-    });*/
-
     /*model.fetchCategoryListData(new RepositoryContract.GetCategoryListCallback() {
 
       @Override
@@ -98,17 +71,10 @@ public class CategoryListPresenter implements CategoryListContract.Presenter {
 
   @Override
   public void selectedCategoryData(CategoryItem item) {
-    //router.passDataToProductListScreen(item);
-    //passDataToProductListScreen(item);
     mediator.setCategory(item);
-    //router.navigateToProductListScreen();
     view.get().navigateToProductListScreen();
   }
 
-
-//  private void passDataToProductListScreen(CategoryItem item) {
-//    mediator.setCategory(item);
-//  }
 
   @Override
   public void injectView(WeakReference<CategoryListContract.View> view) {
@@ -120,9 +86,5 @@ public class CategoryListPresenter implements CategoryListContract.Presenter {
     this.model = model;
   }
 
-//  @Override
-//  public void injectRouter(CategoryListContract.Router router) {
-//    this.router = router;
-//  }
 
 }

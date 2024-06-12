@@ -29,33 +29,11 @@ public class CategoryListActivity
     setContentView(R.layout.activity_category_list);
     setTitle(R.string.title_category_list);
 
-    /*Toolbar toolbar = findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
-
-    ActionBar actionBar = getSupportActionBar();
-    if (actionBar != null) {
-      actionBar.setTitle(R.string.app_name);
-    }*/
-
-//    listAdapter = new CategoryListAdapter(new View.OnClickListener() {
-//
-//      @Override
-//      public void onClick(View view) {
-//        CategoryItem item = (CategoryItem) view.getTag();
-//        presenter.selectCategoryListData(item);
-//      }
-//    });
-//
-//    RecyclerView recyclerView = findViewById(R.id.category_recycler);
-//    recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//    recyclerView.setAdapter(listAdapter);
-
     // do the setup
     CategoryListScreen.configure(this);
 
     // do some work
     initCategoryListContainer();
-    //presenter.fetchCategoryListData();
 
     if(savedInstanceState == null) {
       presenter.onCreateCalled();
@@ -74,15 +52,6 @@ public class CategoryListActivity
   }
 
   private void initCategoryListContainer() {
-
-    /*listAdapter = new CategoryListAdapter(new View.OnClickListener() {
-
-      @Override
-      public void onClick(View view) {
-        CategoryItem item = (CategoryItem) view.getTag();
-        presenter.selectCategoryListData(item);
-      }
-    });*/
 
     listAdapter = new CategoryListAdapter(view -> {
       CategoryItem item = (CategoryItem) view.getTag();
@@ -115,17 +84,6 @@ public class CategoryListActivity
       // deal with the data
       listAdapter.setItems(viewModel.categories);
     });
-
-    /*runOnUiThread(new Runnable() {
-
-      @Override
-      public void run() {
-
-        // deal with the data
-        listAdapter.setItems(viewModel.categories);
-      }
-
-    });*/
 
   }
 

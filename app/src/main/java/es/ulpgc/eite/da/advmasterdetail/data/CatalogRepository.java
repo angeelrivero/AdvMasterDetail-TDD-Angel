@@ -260,25 +260,4 @@ public class CatalogRepository implements RepositoryContract {
   }
 
 
-//  private String loadJSONFromAsset() {
-//    //Log.e(TAG, "loadJSONFromAsset()");
-//
-//    String json = null;
-//
-//    try {
-//
-//      InputStream is = context.getAssets().open(JSON_FILE);
-//      int size = is.available();
-//      byte[] buffer = new byte[size];
-//      is.read(buffer);
-//      is.close();
-//      json = new String(buffer, "UTF-8");
-//
-//    } catch (IOException error) {
-//      Log.e(TAG, "error: " + error);
-//    }
-//
-//    return json;
-//  }
-
 }
