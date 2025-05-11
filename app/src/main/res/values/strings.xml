@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Adv Master-Detail</string>
 
-    <string name="title_movie_list">Lista de Peliculas</string>
+    <string name="title_movie_list">Peliculas Retro</string>
     <string name="title_movie_detail">Movie Detail</string>
     <string name="item_content">Item Content</string>
     <string name="item_details">Item Details</string>
