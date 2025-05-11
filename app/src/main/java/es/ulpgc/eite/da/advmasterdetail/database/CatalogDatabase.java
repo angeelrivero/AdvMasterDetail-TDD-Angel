@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase;
 import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
 
 
-@Database(entities = {MovieItem.class}, version = 1)
+@Database(entities = {MovieItem.class}, version = 2)
 public abstract class CatalogDatabase extends RoomDatabase {
 
   public abstract MovieDao movieDao();
