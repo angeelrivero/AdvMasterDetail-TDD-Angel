@@ -5,4 +5,11 @@
     <string name="title_movie_detail">Movie Detail</string>
     <string name="item_content">Item Content</string>
     <string name="item_details">Item Details</string>
+    <string name="username_hint">Nombre de Usuario</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="btn_login">Iniciar Sesión</string>
+    <string name="btn_guest">Iniciar Sin Cuenta</string>
+    <string name="sign_up_text">¿No tienes cuenta? Sign Up</string>
+    <string name="logo_description">Logo de Películas Retro</string>
+
 </resources>

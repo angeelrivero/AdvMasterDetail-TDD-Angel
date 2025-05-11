@@ -31,6 +31,9 @@ public interface LoginContract {
     }
 
     interface Model {
-        boolean validateUser(String username, String password);
+        interface ValidateUserCallback {
+            void onResult(boolean isValid);
+        }
+        void validateUser(String username, String password, ValidateUserCallback callback);
     }
 }

@@ -1,4 +1,6 @@
 package es.ulpgc.eite.da.advmasterdetail.login;
+import android.os.Handler;
+import android.os.Looper;
 
 import java.lang.ref.WeakReference;
 
@@ -58,19 +60,26 @@ public class LoginPresenter implements LoginContract.Presenter {
         Log.d(TAG, "onLoginButtonClicked()");
 
         if (username.isEmpty() || password.isEmpty()) {
-            view.get().showLoginError("Introduce usuario y contraseña.");
+            new Handler(Looper.getMainLooper()).post(() -> {
+                view.get().showLoginError("Introduce usuario y contraseña.");
+            });
             return;
         }
 
-        boolean valido = model.validateUser(username, password);
-        if (valido) {
-            Log.d(TAG, "Usuario válido. Navegando a lista.");
-            view.get().navigateToMovieList();
-        } else {
-            Log.d(TAG, "Credenciales incorrectas.");
-            view.get().showLoginError("Usuario o contraseña incorrectos.");
-        }
+        model.validateUser(username, password, isValid -> {
+            new Handler(Looper.getMainLooper()).post(() -> {
+                if (isValid) {
+                    Log.d(TAG, "Usuario válido. Navegando a lista.");
+                    view.get().navigateToMovieList();
+                } else {
+                    Log.d(TAG, "Credenciales incorrectas.");
+                    view.get().showLoginError("Usuario o contraseña incorrectos.");
+                }
+            });
+        });
     }
+
+
 
     @Override
     public void onGuestButtonClicked() {
