@@ -4,122 +4,79 @@ import java.lang.ref.WeakReference;
 
 import android.util.Log;
 
+import es.ulpgc.eite.da.advmasterdetail.app.CatalogMediator;
+
 public class RegisterPresenter implements RegisterContract.Presenter {
 
-    public static String TAG = "Adv Master-Detail.RegisterPresenter";
+    public static final String TAG = "RegisterPresenter";
 
     private WeakReference<RegisterContract.View> view;
-    private AppMediator mediator;
+    private CatalogMediator mediator;
     private RegisterContract.Model model;
     private RegisterState state;
 
-    public RegisterPresenter(AppMediator mediator) {
+    public RegisterPresenter(CatalogMediator mediator) {
         this.mediator = mediator;
     }
 
     @Override
     public void onCreateCalled() {
-        Log.e(TAG, "onCreateCalled()");
-
-        // call the mediator initialize the state
+        Log.d(TAG, "onCreateCalled()");
         state = new RegisterState();
-
-
-        // use saved state if is necessary
-        SavedPreviousRegisterState savedState = getStateFromPreviousScreen();
-        if (savedState != null) {
-
-            // update the model if is necessary
-            model.onUpdatedDataFromPreviousScreen(savedState.data);
-
-        }
-
     }
 
     @Override
     public void onRecreateCalled() {
-        Log.e(TAG, "onRecreateCalled()");
-
-        // call the mediator to initialize the state
-        state = getSavedScreenState();
-
-        // update the model if is necessary
-        model.onUpdatedDataFromRecreatedScreen(state.data);
+        Log.d(TAG, "onRecreateCalled()");
+        state = mediator.getRegisterScreenState();
     }
 
     @Override
     public void onResumeCalled() {
-        Log.e(TAG, "onResumeCalled()");
-
-
-        // use passed state if is necessary
-        SavedNextRegisterState savedState = getStateFromNextScreen();
-        if (savedState != null) {
-
-            // update the model if is necessary
-            model.onUpdatedDataFromNextScreen(savedState.data);
-
-        }
-
-        // call the model and initialize the state
-        state.data = model.getCurrentData();
-
-        // update the view
-        view.get().onRefreshViewWithUpdatedData(state);
-
-    }
-
-    @Override
-    public void onBackButtonPressed() {
-        Log.e(TAG, "onBackButtonPressed()");
-
+        Log.d(TAG, "onResumeCalled()");
+        view.get().injectPresenter(this); // por si se reconstruye
     }
 
     @Override
     public void onPauseCalled() {
-        Log.e(TAG, "onPauseCalled()");
-
-        // save the state
-        saveScreenState();
+        Log.d(TAG, "onPauseCalled()");
+        mediator.setRegisterScreenState(state);
     }
 
     @Override
     public void onDestroyCalled() {
-        Log.e(TAG, "onDestroyCalled()");
-
-        // reset the state if is necessary
-        //resetScreenState();
+        Log.d(TAG, "onDestroyCalled()");
     }
 
-    private RegisterState getSavedScreenState() {
-        return mediator.getRegisterScreenState();
+    @Override
+    public void onBackButtonPressed() {
+        Log.d(TAG, "onBackButtonPressed()");
+        view.get().navigateToPreviousScreen(); // ← vuelve al Login
     }
 
-    private void saveScreenState() {
-        mediator.setRegisterScreenState(state);
-    }
+    @Override
+    public void onRegisterButtonClicked(String username, String email, String password, String repeatPassword) {
+        Log.d(TAG, "onRegisterButtonClicked()");
 
+        // Validación simple
+        if (username.isEmpty() || email.isEmpty() || password.isEmpty() || repeatPassword.isEmpty()) {
+            view.get().showValidationError("Rellena todos los campos.");
+            return;
+        }
 
-  /*
-  private void resetScreenState() {
-    mediator.resetRegisterScreenState();
-  }
-  */
+        if (!password.equals(repeatPassword)) {
+            view.get().showValidationError("Las contraseñas no coinciden.");
+            return;
+        }
 
-    private SavedNextRegisterState getStateFromNextScreen() {
-        return mediator.getNextRegisterScreenState();
-    }
+        if (model.userExists(username, email)) {
+            view.get().showValidationError("Este usuario ya existe.");
+            return;
+        }
 
-    private void passStateToNextScreen(NewNextRegisterState state) {
-        mediator.setNextRegisterScreenState(state);
-    }
-
-    private void passStateToPreviousScreen(NewPreviousRegisterState state) {
-        mediator.setPreviousRegisterScreenState(state);
-    }
-
-    private SavedPreviousRegisterState getStateFromPreviousScreen() {
-        return mediator.getPreviousRegisterScreenState();
+        // Guardar usuario en la base de datos
+        model.saveUser(username, email, password);
+        view.get().finishRegistration();
     }
 
     @Override
@@ -131,5 +88,4 @@ public class RegisterPresenter implements RegisterContract.Presenter {
     public void injectModel(RegisterContract.Model model) {
         this.model = model;
     }
-
 }

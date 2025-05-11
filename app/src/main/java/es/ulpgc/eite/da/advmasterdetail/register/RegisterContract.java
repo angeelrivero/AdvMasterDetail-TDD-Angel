@@ -7,45 +7,30 @@ public interface RegisterContract {
     interface View {
         void injectPresenter(Presenter presenter);
 
-        void onRefreshViewWithUpdatedData(RegisterViewModel viewModel);
+        void showValidationError(String message);
 
-        void navigateToNextScreen();
+        void finishRegistration();
 
         void navigateToPreviousScreen();
     }
 
     interface Presenter {
         void injectView(WeakReference<View> view);
-
         void injectModel(Model model);
 
-        void onResumeCalled();
-
         void onCreateCalled();
-
+        void onResumeCalled();
         void onRecreateCalled();
-
+        void onPauseCalled();
+        void onDestroyCalled();
         void onBackButtonPressed();
 
-        void onPauseCalled();
-
-        void onDestroyCalled();
+        void onRegisterButtonClicked(String username, String email, String password, String repeatPassword);
     }
 
     interface Model {
-        String getStoredData();
+        boolean userExists(String username, String email);
 
-        String getSavedData();
-
-        String getCurrentData();
-
-        void setCurrentData(String data);
-
-        void onUpdatedDataFromRecreatedScreen(String data);
-
-        void onUpdatedDataFromNextScreen(String data);
-
-        void onUpdatedDataFromPreviousScreen(String data);
+        void saveUser(String username, String email, String password);
     }
-
 }

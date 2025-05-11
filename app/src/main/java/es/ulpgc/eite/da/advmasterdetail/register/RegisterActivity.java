@@ -1,104 +1,85 @@
 package es.ulpgc.eite.da.advmasterdetail.register;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.util.Log;
+import es.ulpgc.eite.da.advmasterdetail.R;
 
-public class RegisterActivity
-        extends AppCompatActivity implements RegisterContract.View {
+public class RegisterActivity extends AppCompatActivity implements RegisterContract.View {
 
-    public static String TAG = "Adv Master-Detail.RegisterActivity";
+    public static final String TAG = "RegisterActivity";
 
     private RegisterContract.Presenter presenter;
+
+    private EditText usernameField;
+    private EditText emailField;
+    private EditText passwordField;
+    private EditText repeatPasswordField;
+    private Button registerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_);
+        setContentView(R.layout.activity_register); // Asegúrate de que este layout exista
         setTitle(R.string.app_name);
 
-        // Log.e(TAG, "onCreate()");
+        RegisterScreen.configure(this); // MVP setup
 
-        // do the setup
-        RegisterScreen.configure(this);
+        initViews();
 
-        // init or update the state
-        if (savedInstanceState == null) {
-            presenter.onCreateCalled();
+        registerButton.setOnClickListener(view -> {
+            String username = usernameField.getText().toString().trim();
+            String email = emailField.getText().toString().trim();
+            String password = passwordField.getText().toString().trim();
+            String repeatPassword = repeatPasswordField.getText().toString().trim();
 
-        } else {
-            presenter.onRecreateCalled();
-        }
+            presenter.onRegisterButtonClicked(username, email, password, repeatPassword);
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        // Log.e(TAG, "onResume()");
-
-        // load the data
         presenter.onResumeCalled();
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-
-        // Log.e(TAG, "onBackPressed()");
-
-        presenter.onBackButtonPressed();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-
-        // Log.e(TAG, "onPause()");
-
         presenter.onPauseCalled();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        // Log.e(TAG, "onDestroy()");
-
-        presenter.onDestroyCalled();
-    }
-
-    @Override
-    public void onRefreshViewWithUpdatedData(RegisterViewModel viewModel) {
-        //Log.e(TAG, "onRefreshViewWithUpdatedData()");
-
-        // deal with the data
-        ((TextView) findViewById(R.id.data)).setText(viewModel.data);
-    }
-
-
-    @Override
-    public void navigateToNextScreen() {
-        // Log.e(TAG, "navigateToNextScreen()");
-
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
-    }
-
-    @Override
-    public void navigateToPreviousScreen() {
-        // Log.e(TAG, "navigateToPreviousScreen()");
-
-        finish();
+    private void initViews() {
+        usernameField = findViewById(R.id.edit_register_username);
+        emailField = findViewById(R.id.edit_register_email);
+        passwordField = findViewById(R.id.edit_register_password);
+        repeatPasswordField = findViewById(R.id.edit_register_repeat_password);
+        registerButton = findViewById(R.id.btn_register);
     }
 
     @Override
     public void injectPresenter(RegisterContract.Presenter presenter) {
         this.presenter = presenter;
+    }
+
+    @Override
+    public void showValidationError(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void finishRegistration() {
+        Toast.makeText(this, "Cuenta creada correctamente", Toast.LENGTH_SHORT).show();
+        finish(); // Puedes redirigir a login o main si prefieres
+    }
+
+    @Override
+    public void navigateToPreviousScreen() {
+
     }
 }

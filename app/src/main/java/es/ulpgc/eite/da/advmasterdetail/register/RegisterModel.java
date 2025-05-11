@@ -2,64 +2,27 @@ package es.ulpgc.eite.da.advmasterdetail.register;
 
 import android.util.Log;
 
+import es.ulpgc.eite.da.advmasterdetail.data.UserRepository;
+
 public class RegisterModel implements RegisterContract.Model {
 
-    public static String TAG = "Adv Master-Detail.RegisterModel";
+    public static final String TAG = "RegisterModel";
 
-    private String data;
+    private final UserRepository userRepository;
 
-    public RegisterModel(String data) {
-        this.data = data;
+    public RegisterModel(UserRepository repository) {
+        this.userRepository = repository;
     }
 
     @Override
-    public String getStoredData() {
-        // Log.e(TAG, "getStoredData()");
-
-        return data;
-    }
-
-
-    @Override
-    public String getSavedData() {
-        // Log.e(TAG, "getSavedData()");
-
-        return data;
-    }
-
-
-    @Override
-    public String getCurrentData() {
-        // Log.e(TAG, "getCurrentData()");
-
-        return data;
+    public boolean userExists(String username, String email) {
+        Log.d(TAG, "Verificando si el usuario ya existe...");
+        return userRepository.userExists(username, email);
     }
 
     @Override
-    public void setCurrentData(String data) {
-        // Log.e(TAG, "setCurrentData()");
-
-        this.data = data;
-    }
-
-    @Override
-    public void onUpdatedDataFromRecreatedScreen(String data) {
-        // Log.e(TAG, "onUpdatedDataFromRecreatedScreen()");
-
-
-    }
-
-    @Override
-    public void onUpdatedDataFromNextScreen(String data) {
-        // Log.e(TAG, "onUpdatedDataFromNextScreen()");
-
-
-    }
-
-    @Override
-    public void onUpdatedDataFromPreviousScreen(String data) {
-        // Log.e(TAG, "onUpdatedDataFromPreviousScreen()");
-
-
+    public void saveUser(String username, String email, String password) {
+        Log.d(TAG, "Guardando nuevo usuario...");
+        userRepository.insertUser(username, email, password);
     }
 }

@@ -3,11 +3,13 @@ package es.ulpgc.eite.da.advmasterdetail.app;
 import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
 import es.ulpgc.eite.da.advmasterdetail.movie.MovieDetailState;
 import es.ulpgc.eite.da.advmasterdetail.movies.MoviesListState;
+import es.ulpgc.eite.da.advmasterdetail.register.RegisterState;
 
 public class CatalogMediator {
 
   private MoviesListState moviesListState;
   private MovieDetailState movieDetailState;
+  private RegisterState registerState;
 
   private MovieItem selectedMovie;
 
@@ -55,4 +57,14 @@ public class CatalogMediator {
   public void setSelectedMovie(MovieItem item) {
     this.selectedMovie = item;
   }
+
+  public RegisterState getRegisterScreenState() {
+    return registerState;
+  }
+
+  public void setRegisterScreenState(RegisterState state) {
+    this.registerState = state;
+  }
+
+
 }
