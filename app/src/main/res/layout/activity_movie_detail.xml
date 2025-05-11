@@ -10,39 +10,41 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".movie.MovieDetailActivity">
+        android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp">
+            android:layout_margin="8dp"
+            app:cardElevation="4dp"
+            app:cardCornerRadius="8dp">
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:padding="8dp">
 
+                <!-- Imagen del cartel de la película -->
                 <ImageView
-                    android:id="@+id/product_image"
+                    android:id="@+id/movie_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     tools:src="@tools:sample/avatars"/>
 
+                <!-- Texto con los detalles de la película -->
                 <TextView
-                    android:id="@+id/product_detail"
+                    android:id="@+id/movie_detail"
                     style="?android:attr/textAppearanceMedium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
                     android:textIsSelectable="false"
-                    tools:text="@string/item_details"/>
+                    tools:text="Aquí se mostrarán los detalles de la película"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </ScrollView>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
