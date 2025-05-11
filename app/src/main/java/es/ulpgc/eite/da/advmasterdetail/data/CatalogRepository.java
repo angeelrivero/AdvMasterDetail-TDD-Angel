@@ -22,7 +22,7 @@ import java.util.List;
 
 import es.ulpgc.eite.da.advmasterdetail.database.CatalogDatabase;
 import es.ulpgc.eite.da.advmasterdetail.database.CategoryDao;
-import es.ulpgc.eite.da.advmasterdetail.database.ProductDao;
+import es.ulpgc.eite.da.advmasterdetail.database.MovieDao;
 
 
 public class CatalogRepository implements RepositoryContract {
@@ -184,7 +184,7 @@ public class CatalogRepository implements RepositoryContract {
     return database.categoryDao();
   }
 
-  private ProductDao getProductDao() {
+  private MovieDao getProductDao() {
     return database.productDao();
   }
 

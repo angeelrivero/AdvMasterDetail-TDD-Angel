@@ -11,5 +11,7 @@ import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
 public abstract class CatalogDatabase extends RoomDatabase {
 
   public abstract CategoryDao categoryDao();
-  public abstract ProductDao productDao();
+  public abstract MovieDao movieDao();
+
+
 }

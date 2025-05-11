@@ -1,252 +1,254 @@
-[
-  {
-    "id": 1,
-    "title": "Psicosis",
-    "year": 1960,
-    "duration": 109,
-    "director": "Alfred Hitchcock",
-    "description": "Una secretaria huye tras robar dinero y se refugia en un motel dirigido por un hombre perturbado.",
-    "actors": ["Anthony Perkins", "Janet Leigh", "Vera Miles"],
-    "posterUrl": "https://m.media-amazon.com/images/M/MV5BOGMzMmMyZjQtYTI4YS00ZDIxLWIyYjgtYWVlYzk2MWE5MjJlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
-  },
-  {
-    "id": 2,
-    "title": "La noche de los muertos vivientes",
-    "year": 1968,
-    "duration": 96,
-    "director": "George A. Romero",
-    "description": "Un grupo de personas se refugia en una granja mientras los muertos vuelven a la vida.",
-    "actors": ["Duane Jones", "Judith O'Dea", "Karl Hardman"],
-    "posterUrl": "https://pics.filmaffinity.com/night_of_the_living_dead-198516797-large.jpg"
-  },
-  {
-    "id": 3,
-    "title": "2001: Una odisea del espacio",
-    "year": 1968,
-    "duration": 149,
-    "director": "Stanley Kubrick",
-    "description": "Un viaje visual y filosófico por la evolución humana, la inteligencia artificial y el universo.",
-    "actors": ["Keir Dullea", "Gary Lockwood", "Douglas Rain"],
-    "posterUrl": "https://pics.filmaffinity.com/2001_Una_odisea_del_espacio-672690162-large.jpg"
-  },
-  {
-    "id": 4,
-    "title": "El graduado",
-    "year": 1967,
-    "duration": 106,
-    "director": "Mike Nichols",
-    "description": "Un joven recién graduado se ve envuelto en un romance con una mujer mayor.",
-    "actors": ["Dustin Hoffman", "Anne Bancroft", "Katharine Ross"],
-    "posterUrl": "https://es.web.img3.acsta.net/pictures/14/03/27/13/33/444788.jpg"
-  },
-  {
-    "id": 5,
-    "title": "La leyenda del indomable",
-    "year": 1967,
-    "duration": 126,
-    "director": "Stuart Rosenberg",
-    "description": "Un prisionero desafía la autoridad en una prisión sureña con su actitud rebelde.",
-    "actors": ["Paul Newman", "George Kennedy", "Strother Martin"],
-    "posterUrl": "https://es.web.img3.acsta.net/pictures/15/11/02/12/48/403291.jpg"
-  },
-  {
-    "id": 6,
-    "title": "El Padrino",
-    "year": 1972,
-    "duration": 175,
-    "director": "Francis Ford Coppola",
-    "description": "La historia de la familia mafiosa Corleone en su lucha por el poder.",
-    "actors": ["Marlon Brando", "Al Pacino", "James Caan"],
-    "posterUrl": "https://pics.filmaffinity.com/El_padrino-993414333-large.jpg"
-  },
-  {
-    "id": 7,
-    "title": "Tiburón",
-    "year": 1975,
-    "duration": 124,
-    "director": "Steven Spielberg",
-    "description": "Un tiburón asesino aterroriza a una comunidad costera.",
-    "actors": ["Roy Scheider", "Robert Shaw", "Richard Dreyfuss"],
-    "posterUrl": "https://upload.wikimedia.org/wikipedia/commons/4/40/Jaws_movie_poster.jpg"
-  },
-  {
-    "id": 8,
-    "title": "La naranja mecánica",
-    "year": 1971,
-    "duration": 136,
-    "director": "Stanley Kubrick",
-    "description": "Un joven violento es sometido a un tratamiento de reeducación psicológica.",
-    "actors": ["Malcolm McDowell", "Patrick Magee", "Adrienne Corri"],
-    "posterUrl": "https://pics.filmaffinity.com/La_naranja_mecaanica-904919321-large.jpg"
-  },
-  {
-    "id": 9,
-    "title": "Rocky",
-    "year": 1976,
-    "duration": 120,
-    "director": "John G. Avildsen",
-    "description": "Un boxeador desconocido tiene la oportunidad de enfrentarse al campeón del mundo.",
-    "actors": ["Sylvester Stallone", "Talia Shire", "Burt Young"],
-    "posterUrl": "https://pics.filmaffinity.com/Rocky-253483905-mmed.jpg"
-  },
-  {
-    "id": 10,
-    "title": "Alien: El octavo pasajero",
-    "year": 1979,
-    "duration": 117,
-    "director": "Ridley Scott",
-    "description": "La tripulación de una nave espacial es acechada por una criatura mortal.",
-    "actors": ["Sigourney Weaver", "Tom Skerritt", "John Hurt"],
-    "posterUrl": "https://m.media-amazon.com/images/M/MV5BN2NhMDk2MmEtZDQzOC00MmY5LThhYzAtMDdjZGFjOGZjMjdjXkEyXkFqcGc@._V1_.jpg"
-  },
-  {
-    "id": 11,
-    "title": "Star Wars: Episodio V - El Imperio contraataca",
-    "year": 1980,
-    "duration": 124,
-    "director": "Irvin Kershner",
-    "description": "La Rebelión enfrenta tiempos oscuros mientras Darth Vader persigue a Luke Skywalker.",
-    "actors": ["Mark Hamill", "Harrison Ford", "Carrie Fisher"],
-    "posterUrl": "https://pics.filmaffinity.com/star_wars_episode_v_the_empire_strikes_back-701818523-large.jpg"
-  },
-  {
-    "id": 12,
-    "title": "Blade Runner",
-    "year": 1982,
-    "duration": 117,
-    "director": "Ridley Scott",
-    "description": "Un cazador de replicantes debe eliminar androides ilegales en un futuro distópico.",
-    "actors": ["Harrison Ford", "Rutger Hauer", "Sean Young"],
-    "posterUrl": "https://pics.filmaffinity.com/Blade_Runner-351607743-large.jpg"
-  },
-  {
-    "id": 13,
-    "title": "Los cazafantasmas",
-    "year": 1984,
-    "duration": 105,
-    "director": "Ivan Reitman",
-    "description": "Un grupo de científicos lucha contra seres paranormales en Nueva York.",
-    "actors": ["Bill Murray", "Dan Aykroyd", "Sigourney Weaver"],
-    "posterUrl": "https://pics.filmaffinity.com/Los_cazafantasmas-708072042-large.jpg"
-  },
-  {
-    "id": 14,
-    "title": "Regreso al futuro",
-    "year": 1985,
-    "duration": 116,
-    "director": "Robert Zemeckis",
-    "description": "Un joven viaja accidentalmente al pasado y debe asegurar el futuro.",
-    "actors": ["Michael J. Fox", "Christopher Lloyd", "Lea Thompson"],
-    "posterUrl": "https://pics.filmaffinity.com/Regreso_al_futuro-139415628-large.jpg"
-  },
-  {
-    "id": 15,
-    "title": "La princesa prometida",
-    "year": 1987,
-    "duration": 98,
-    "director": "Rob Reiner",
-    "description": "Un cuento de amor verdadero, espadas, piratas y venganza.",
-    "actors": ["Cary Elwes", "Robin Wright", "Mandy Patinkin"],
-    "posterUrl": "https://pics.filmaffinity.com/the_princess_bride-741508250-large.jpg"
-  },
-  {
-    "id": 16,
-    "title": "Pulp Fiction",
-    "year": 1994,
-    "duration": 154,
-    "director": "Quentin Tarantino",
-    "description": "Historias entrelazadas de crimen, redención y violencia en Los Ángeles.",
-    "actors": ["John Travolta", "Samuel L. Jackson", "Uma Thurman"],
-    "posterUrl": "https://pics.filmaffinity.com/Pulp_Fiction-210382116-large.jpg"
-  },
-  {
-    "id": 17,
-    "title": "Forrest Gump",
-    "year": 1994,
-    "duration": 142,
-    "director": "Robert Zemeckis",
-    "description": "Un hombre con bajo coeficiente intelectual vive momentos clave de la historia moderna.",
-    "actors": ["Tom Hanks", "Robin Wright", "Gary Sinise"],
-    "posterUrl": "https://pics.filmaffinity.com/Forrest_Gump-212765827-mmed.jpg"
-  },
-  {
-    "id": 18,
-    "title": "El silencio de los corderos",
-    "year": 1991,
-    "duration": 118,
-    "director": "Jonathan Demme",
-    "description": "Una joven agente del FBI busca la ayuda de un asesino para atrapar a otro.",
-    "actors": ["Jodie Foster", "Anthony Hopkins", "Scott Glenn"],
-    "posterUrl": "https://pics.filmaffinity.com/il_silenzio_dei_prosciutti-657935574-large.jpg"
-  },
-  {
-    "id": 19,
-    "title": "Matrix",
-    "year": 1999,
-    "duration": 136,
-    "director": "Hermanas Wachowski",
-    "description": "Un programador descubre que el mundo es una simulación y lidera la rebelión.",
-    "actors": ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"],
-    "posterUrl": "https://pics.filmaffinity.com/Matrix-155050517-large.jpg"
-  },
-  {
-    "id": 20,
-    "title": "El club de la pelea",
-    "year": 1999,
-    "duration": 139,
-    "director": "David Fincher",
-    "description": "Un oficinista forma un club secreto de peleas con un misterioso vendedor de jabón.",
-    "actors": ["Brad Pitt", "Edward Norton", "Helena Bonham Carter"],
-    "posterUrl": "https://pics.filmaffinity.com/fight_club-320750671-mmed.jpg"
-  },
-  {
-    "id": 21,
-    "title": "E.T., el extraterrestre",
-    "year": 1982,
-    "duration": 115,
-    "director": "Steven Spielberg",
-    "description": "Un pequeño ser de otro planeta se queda abandonado en la Tierra...",
-    "actors": ["Henry Thomas", "Drew Barrymore", "Dee Wallace"],
-    "posterUrl": "https://pics.filmaffinity.com/E_T_el_extraterrestre-391240254-mmed.jpg"
-  },
-  {
-    "id": 22,
-    "title": "El planeta de los simios",
-    "year": 1968,
-    "duration": 112,
-    "director": "Franklin J. Schaffner",
-    "description": "Un astronauta aterriza en un planeta dominado por simios inteligentes...",
-    "actors": ["Charlton Heston", "Roddy McDowall", "Kim Hunter"],
-    "posterUrl": "https://pics.filmaffinity.com/El_planeta_de_los_simios-661286625-large.jpg"
-  },
-  {
-    "id": 23,
-    "title": "Gremlins",
-    "year": 1984,
-    "duration": 106,
-    "director": "Joe Dante",
-    "description": "Una criatura adorable genera monstruos destructivos al no seguir las reglas de cuidado.",
-    "actors": ["Zach Galligan", "Phoebe Cates", "Hoyt Axton"],
-    "posterUrl": "https://pics.filmaffinity.com/Gremlins-983652512-large.jpg"
-  },
-  {
-    "id": 24,
-    "title": "Los invasores de Marte",
-    "year": 1953,
-    "duration": 78,
-    "director": "William Cameron Menzies",
-    "description": "Un niño presencia cómo una nave alienígena aterriza y sus padres comienzan a comportarse extrañamente.",
-    "actors": ["Helena Carter", "Arthur Franz", "Jimmy Hunt"],
-    "posterUrl": "https://pics.filmaffinity.com/Invasores_de_Marte-754773512-large.jpg"
-  },
-  {
-    "id": 25,
-    "title": "Space Raiders",
-    "year": 1983,
-    "duration": 84,
-    "director": "Howard R. Cohen",
-    "description": "Un niño es secuestrado por un grupo de piratas espaciales y vive aventuras en el espacio.",
-    "actors": ["Vince Edwards", "David Mendenhall", "Patsy Pease"],
-    "posterUrl": "https://pics.filmaffinity.com/Space_Raiders-435421689-large.jpg"
-  }
-]
+{
+  "movies": [
+    {
+      "id": 1,
+      "title": "Psicosis",
+      "year": 1960,
+      "duration": 109,
+      "director": "Alfred Hitchcock",
+      "description": "Una secretaria huye tras robar dinero y se refugia en un motel dirigido por un hombre perturbado.",
+      "actors": ["Anthony Perkins", "Janet Leigh", "Vera Miles"],
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BOGMzMmMyZjQtYTI4YS00ZDIxLWIyYjgtYWVlYzk2MWE5MjJlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+    },
+    {
+      "id": 2,
+      "title": "La noche de los muertos vivientes",
+      "year": 1968,
+      "duration": 96,
+      "director": "George A. Romero",
+      "description": "Un grupo de personas se refugia en una granja mientras los muertos vuelven a la vida.",
+      "actors": ["Duane Jones", "Judith O'Dea", "Karl Hardman"],
+      "posterUrl": "https://pics.filmaffinity.com/night_of_the_living_dead-198516797-large.jpg"
+    },
+    {
+      "id": 3,
+      "title": "2001: Una odisea del espacio",
+      "year": 1968,
+      "duration": 149,
+      "director": "Stanley Kubrick",
+      "description": "Un viaje visual y filosófico por la evolución humana, la inteligencia artificial y el universo.",
+      "actors": ["Keir Dullea", "Gary Lockwood", "Douglas Rain"],
+      "posterUrl": "https://pics.filmaffinity.com/2001_Una_odisea_del_espacio-672690162-large.jpg"
+    },
+    {
+      "id": 4,
+      "title": "El graduado",
+      "year": 1967,
+      "duration": 106,
+      "director": "Mike Nichols",
+      "description": "Un joven recién graduado se ve envuelto en un romance con una mujer mayor.",
+      "actors": ["Dustin Hoffman", "Anne Bancroft", "Katharine Ross"],
+      "posterUrl": "https://es.web.img3.acsta.net/pictures/14/03/27/13/33/444788.jpg"
+    },
+    {
+      "id": 5,
+      "title": "La leyenda del indomable",
+      "year": 1967,
+      "duration": 126,
+      "director": "Stuart Rosenberg",
+      "description": "Un prisionero desafía la autoridad en una prisión sureña con su actitud rebelde.",
+      "actors": ["Paul Newman", "George Kennedy", "Strother Martin"],
+      "posterUrl": "https://es.web.img3.acsta.net/pictures/15/11/02/12/48/403291.jpg"
+    },
+    {
+      "id": 6,
+      "title": "El Padrino",
+      "year": 1972,
+      "duration": 175,
+      "director": "Francis Ford Coppola",
+      "description": "La historia de la familia mafiosa Corleone en su lucha por el poder.",
+      "actors": ["Marlon Brando", "Al Pacino", "James Caan"],
+      "posterUrl": "https://pics.filmaffinity.com/El_padrino-993414333-large.jpg"
+    },
+    {
+      "id": 7,
+      "title": "Tiburón",
+      "year": 1975,
+      "duration": 124,
+      "director": "Steven Spielberg",
+      "description": "Un tiburón asesino aterroriza a una comunidad costera.",
+      "actors": ["Roy Scheider", "Robert Shaw", "Richard Dreyfuss"],
+      "posterUrl": "https://upload.wikimedia.org/wikipedia/commons/4/40/Jaws_movie_poster.jpg"
+    },
+    {
+      "id": 8,
+      "title": "La naranja mecánica",
+      "year": 1971,
+      "duration": 136,
+      "director": "Stanley Kubrick",
+      "description": "Un joven violento es sometido a un tratamiento de reeducación psicológica.",
+      "actors": ["Malcolm McDowell", "Patrick Magee", "Adrienne Corri"],
+      "posterUrl": "https://pics.filmaffinity.com/La_naranja_mecaanica-904919321-large.jpg"
+    },
+    {
+      "id": 9,
+      "title": "Rocky",
+      "year": 1976,
+      "duration": 120,
+      "director": "John G. Avildsen",
+      "description": "Un boxeador desconocido tiene la oportunidad de enfrentarse al campeón del mundo.",
+      "actors": ["Sylvester Stallone", "Talia Shire", "Burt Young"],
+      "posterUrl": "https://pics.filmaffinity.com/Rocky-253483905-mmed.jpg"
+    },
+    {
+      "id": 10,
+      "title": "Alien: El octavo pasajero",
+      "year": 1979,
+      "duration": 117,
+      "director": "Ridley Scott",
+      "description": "La tripulación de una nave espacial es acechada por una criatura mortal.",
+      "actors": ["Sigourney Weaver", "Tom Skerritt", "John Hurt"],
+      "posterUrl": "https://m.media-amazon.com/images/M/MV5BN2NhMDk2MmEtZDQzOC00MmY5LThhYzAtMDdjZGFjOGZjMjdjXkEyXkFqcGc@._V1_.jpg"
+    },
+    {
+      "id": 11,
+      "title": "Star Wars: Episodio V - El Imperio contraataca",
+      "year": 1980,
+      "duration": 124,
+      "director": "Irvin Kershner",
+      "description": "La Rebelión enfrenta tiempos oscuros mientras Darth Vader persigue a Luke Skywalker.",
+      "actors": ["Mark Hamill", "Harrison Ford", "Carrie Fisher"],
+      "posterUrl": "https://pics.filmaffinity.com/star_wars_episode_v_the_empire_strikes_back-701818523-large.jpg"
+    },
+    {
+      "id": 12,
+      "title": "Blade Runner",
+      "year": 1982,
+      "duration": 117,
+      "director": "Ridley Scott",
+      "description": "Un cazador de replicantes debe eliminar androides ilegales en un futuro distópico.",
+      "actors": ["Harrison Ford", "Rutger Hauer", "Sean Young"],
+      "posterUrl": "https://pics.filmaffinity.com/Blade_Runner-351607743-large.jpg"
+    },
+    {
+      "id": 13,
+      "title": "Los cazafantasmas",
+      "year": 1984,
+      "duration": 105,
+      "director": "Ivan Reitman",
+      "description": "Un grupo de científicos lucha contra seres paranormales en Nueva York.",
+      "actors": ["Bill Murray", "Dan Aykroyd", "Sigourney Weaver"],
+      "posterUrl": "https://pics.filmaffinity.com/Los_cazafantasmas-708072042-large.jpg"
+    },
+    {
+      "id": 14,
+      "title": "Regreso al futuro",
+      "year": 1985,
+      "duration": 116,
+      "director": "Robert Zemeckis",
+      "description": "Un joven viaja accidentalmente al pasado y debe asegurar el futuro.",
+      "actors": ["Michael J. Fox", "Christopher Lloyd", "Lea Thompson"],
+      "posterUrl": "https://pics.filmaffinity.com/Regreso_al_futuro-139415628-large.jpg"
+    },
+    {
+      "id": 15,
+      "title": "La princesa prometida",
+      "year": 1987,
+      "duration": 98,
+      "director": "Rob Reiner",
+      "description": "Un cuento de amor verdadero, espadas, piratas y venganza.",
+      "actors": ["Cary Elwes", "Robin Wright", "Mandy Patinkin"],
+      "posterUrl": "https://pics.filmaffinity.com/the_princess_bride-741508250-large.jpg"
+    },
+    {
+      "id": 16,
+      "title": "Pulp Fiction",
+      "year": 1994,
+      "duration": 154,
+      "director": "Quentin Tarantino",
+      "description": "Historias entrelazadas de crimen, redención y violencia en Los Ángeles.",
+      "actors": ["John Travolta", "Samuel L. Jackson", "Uma Thurman"],
+      "posterUrl": "https://pics.filmaffinity.com/Pulp_Fiction-210382116-large.jpg"
+    },
+    {
+      "id": 17,
+      "title": "Forrest Gump",
+      "year": 1994,
+      "duration": 142,
+      "director": "Robert Zemeckis",
+      "description": "Un hombre con bajo coeficiente intelectual vive momentos clave de la historia moderna.",
+      "actors": ["Tom Hanks", "Robin Wright", "Gary Sinise"],
+      "posterUrl": "https://pics.filmaffinity.com/Forrest_Gump-212765827-mmed.jpg"
+    },
+    {
+      "id": 18,
+      "title": "El silencio de los corderos",
+      "year": 1991,
+      "duration": 118,
+      "director": "Jonathan Demme",
+      "description": "Una joven agente del FBI busca la ayuda de un asesino para atrapar a otro.",
+      "actors": ["Jodie Foster", "Anthony Hopkins", "Scott Glenn"],
+      "posterUrl": "https://pics.filmaffinity.com/il_silenzio_dei_prosciutti-657935574-large.jpg"
+    },
+    {
+      "id": 19,
+      "title": "Matrix",
+      "year": 1999,
+      "duration": 136,
+      "director": "Hermanas Wachowski",
+      "description": "Un programador descubre que el mundo es una simulación y lidera la rebelión.",
+      "actors": ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"],
+      "posterUrl": "https://pics.filmaffinity.com/Matrix-155050517-large.jpg"
+    },
+    {
+      "id": 20,
+      "title": "El club de la pelea",
+      "year": 1999,
+      "duration": 139,
+      "director": "David Fincher",
+      "description": "Un oficinista forma un club secreto de peleas con un misterioso vendedor de jabón.",
+      "actors": ["Brad Pitt", "Edward Norton", "Helena Bonham Carter"],
+      "posterUrl": "https://pics.filmaffinity.com/fight_club-320750671-mmed.jpg"
+    },
+    {
+      "id": 21,
+      "title": "E.T., el extraterrestre",
+      "year": 1982,
+      "duration": 115,
+      "director": "Steven Spielberg",
+      "description": "Un pequeño ser de otro planeta se queda abandonado en la Tierra...",
+      "actors": ["Henry Thomas", "Drew Barrymore", "Dee Wallace"],
+      "posterUrl": "https://pics.filmaffinity.com/E_T_el_extraterrestre-391240254-mmed.jpg"
+    },
+    {
+      "id": 22,
+      "title": "El planeta de los simios",
+      "year": 1968,
+      "duration": 112,
+      "director": "Franklin J. Schaffner",
+      "description": "Un astronauta aterriza en un planeta dominado por simios inteligentes...",
+      "actors": ["Charlton Heston", "Roddy McDowall", "Kim Hunter"],
+      "posterUrl": "https://pics.filmaffinity.com/El_planeta_de_los_simios-661286625-large.jpg"
+    },
+    {
+      "id": 23,
+      "title": "Gremlins",
+      "year": 1984,
+      "duration": 106,
+      "director": "Joe Dante",
+      "description": "Una criatura adorable genera monstruos destructivos al no seguir las reglas de cuidado.",
+      "actors": ["Zach Galligan", "Phoebe Cates", "Hoyt Axton"],
+      "posterUrl": "https://pics.filmaffinity.com/Gremlins-983652512-large.jpg"
+    },
+    {
+      "id": 24,
+      "title": "Los invasores de Marte",
+      "year": 1953,
+      "duration": 78,
+      "director": "William Cameron Menzies",
+      "description": "Un niño presencia cómo una nave alienígena aterriza y sus padres comienzan a comportarse extrañamente.",
+      "actors": ["Helena Carter", "Arthur Franz", "Jimmy Hunt"],
+      "posterUrl": "https://pics.filmaffinity.com/Invasores_de_Marte-754773512-large.jpg"
+    },
+    {
+      "id": 25,
+      "title": "Space Raiders",
+      "year": 1983,
+      "duration": 84,
+      "director": "Howard R. Cohen",
+      "description": "Un niño es secuestrado por un grupo de piratas espaciales y vive aventuras en el espacio.",
+      "actors": ["Vince Edwards", "David Mendenhall", "Patsy Pease"],
+      "posterUrl": "https://pics.filmaffinity.com/Space_Raiders-435421689-large.jpg"
+    }
+  ]
+}
