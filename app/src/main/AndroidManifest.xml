@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Permisos necesarios para carga de imágenes y red -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
@@ -18,9 +17,9 @@
         android:theme="@style/Theme.AdvMasterDetail"
         tools:targetApi="31">
 
-        <!-- Pantalla principal: lista de películas -->
+        <!-- Pantalla de inicio: login -->
         <activity
-            android:name=".movies.MoviesListActivity"
+            android:name=".login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -28,9 +27,19 @@
             </intent-filter>
         </activity>
 
-        <!-- Pantalla de detalle de película -->
+        <!-- Lista de películas -->
+        <activity
+            android:name=".movies.MoviesListActivity"
+            android:exported="false" />
+
+        <!-- Detalle de película -->
         <activity
             android:name=".movie.MovieDetailActivity"
+            android:exported="false" />
+
+        <!-- Registro de usuario -->
+        <activity
+            android:name=".register.RegisterActivity"
             android:exported="false" />
     </application>
 </manifest>

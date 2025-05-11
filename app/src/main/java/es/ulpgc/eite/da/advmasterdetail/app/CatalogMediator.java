@@ -1,6 +1,7 @@
 package es.ulpgc.eite.da.advmasterdetail.app;
 
 import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
+import es.ulpgc.eite.da.advmasterdetail.login.LoginState;
 import es.ulpgc.eite.da.advmasterdetail.movie.MovieDetailState;
 import es.ulpgc.eite.da.advmasterdetail.movies.MoviesListState;
 import es.ulpgc.eite.da.advmasterdetail.register.RegisterState;
@@ -10,6 +11,8 @@ public class CatalogMediator {
   private MoviesListState moviesListState;
   private MovieDetailState movieDetailState;
   private RegisterState registerState;
+  private LoginState loginState;
+
 
   private MovieItem selectedMovie;
 
@@ -64,6 +67,14 @@ public class CatalogMediator {
 
   public void setRegisterScreenState(RegisterState state) {
     this.registerState = state;
+  }
+
+  public LoginState getLoginScreenState() {
+    return loginState;
+  }
+
+  public void setLoginScreenState(LoginState state) {
+    this.loginState = state;
   }
 
 
