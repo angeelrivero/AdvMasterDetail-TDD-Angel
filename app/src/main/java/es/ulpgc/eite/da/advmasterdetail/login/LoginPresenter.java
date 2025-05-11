@@ -4,122 +4,84 @@ import java.lang.ref.WeakReference;
 
 import android.util.Log;
 
+import es.ulpgc.eite.da.advmasterdetail.app.CatalogMediator;
+
 public class LoginPresenter implements LoginContract.Presenter {
 
-    public static String TAG = "Adv Master-Detail.LoginPresenter";
+    public static final String TAG = "LoginPresenter";
 
     private WeakReference<LoginContract.View> view;
-    private AppMediator mediator;
+    private CatalogMediator mediator;
     private LoginContract.Model model;
     private LoginState state;
 
-    public LoginPresenter(AppMediator mediator) {
+    public LoginPresenter(CatalogMediator mediator) {
         this.mediator = mediator;
     }
 
     @Override
     public void onCreateCalled() {
-        Log.e(TAG, "onCreateCalled()");
-
-        // call the mediator initialize the state
+        Log.d(TAG, "onCreateCalled()");
         state = new LoginState();
-
-
-        // use saved state if is necessary
-        SavedPreviousLoginState savedState = getStateFromPreviousScreen();
-        if (savedState != null) {
-
-            // update the model if is necessary
-            model.onUpdatedDataFromPreviousScreen(savedState.data);
-
-        }
-
     }
 
     @Override
     public void onRecreateCalled() {
-        Log.e(TAG, "onRecreateCalled()");
-
-        // call the mediator to initialize the state
-        state = getSavedScreenState();
-
-        // update the model if is necessary
-        model.onUpdatedDataFromRecreatedScreen(state.data);
+        Log.d(TAG, "onRecreateCalled()");
+        state = mediator.getLoginScreenState();
     }
 
     @Override
     public void onResumeCalled() {
-        Log.e(TAG, "onResumeCalled()");
-
-
-        // use passed state if is necessary
-        SavedNextLoginState savedState = getStateFromNextScreen();
-        if (savedState != null) {
-
-            // update the model if is necessary
-            model.onUpdatedDataFromNextScreen(savedState.data);
-
-        }
-
-        // call the model and initialize the state
-        state.data = model.getCurrentData();
-
-        // update the view
-        view.get().onRefreshViewWithUpdatedData(state);
-
-    }
-
-    @Override
-    public void onBackButtonPressed() {
-        Log.e(TAG, "onBackButtonPressed()");
-
+        Log.d(TAG, "onResumeCalled()");
     }
 
     @Override
     public void onPauseCalled() {
-        Log.e(TAG, "onPauseCalled()");
-
-        // save the state
-        saveScreenState();
+        Log.d(TAG, "onPauseCalled()");
+        mediator.setLoginScreenState(state);
     }
 
     @Override
     public void onDestroyCalled() {
-        Log.e(TAG, "onDestroyCalled()");
-
-        // reset the state if is necessary
-        //resetScreenState();
+        Log.d(TAG, "onDestroyCalled()");
     }
 
-    private LoginState getSavedScreenState() {
-        return mediator.getLoginScreenState();
+    @Override
+    public void onBackButtonPressed() {
+        Log.d(TAG, "onBackButtonPressed()");
+        // No hacemos nada, dejar que se cierre la app
     }
 
-    private void saveScreenState() {
-        mediator.setLoginScreenState(state);
+    @Override
+    public void onLoginButtonClicked(String username, String password) {
+        Log.d(TAG, "onLoginButtonClicked()");
+
+        if (username.isEmpty() || password.isEmpty()) {
+            view.get().showLoginError("Introduce usuario y contraseña.");
+            return;
+        }
+
+        boolean valido = model.validateUser(username, password);
+        if (valido) {
+            Log.d(TAG, "Usuario válido. Navegando a lista.");
+            view.get().navigateToMovieList();
+        } else {
+            Log.d(TAG, "Credenciales incorrectas.");
+            view.get().showLoginError("Usuario o contraseña incorrectos.");
+        }
     }
 
-
-  /*
-  private void resetScreenState() {
-    mediator.resetLoginScreenState();
-  }
-  */
-
-    private SavedNextLoginState getStateFromNextScreen() {
-        return mediator.getNextLoginScreenState();
+    @Override
+    public void onGuestButtonClicked() {
+        Log.d(TAG, "onGuestButtonClicked()");
+        view.get().navigateAsGuest();
     }
 
-    private void passStateToNextScreen(NewNextLoginState state) {
-        mediator.setNextLoginScreenState(state);
-    }
-
-    private void passStateToPreviousScreen(NewPreviousLoginState state) {
-        mediator.setPreviousLoginScreenState(state);
-    }
-
-    private SavedPreviousLoginState getStateFromPreviousScreen() {
-        return mediator.getPreviousLoginScreenState();
+    @Override
+    public void onSignUpClicked() {
+        Log.d(TAG, "onSignUpClicked()");
+        view.get().navigateToRegisterScreen();
     }
 
     @Override
@@ -131,5 +93,4 @@ public class LoginPresenter implements LoginContract.Presenter {
     public void injectModel(LoginContract.Model model) {
         this.model = model;
     }
-
 }

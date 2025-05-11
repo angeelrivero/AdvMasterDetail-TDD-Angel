@@ -7,45 +7,30 @@ public interface LoginContract {
     interface View {
         void injectPresenter(Presenter presenter);
 
-        void onRefreshViewWithUpdatedData(LoginViewModel viewModel);
+        void showLoginError(String message);
 
-        void navigateToNextScreen();
-
-        void navigateToPreviousScreen();
+        void navigateToMovieList();        // Login exitoso
+        void navigateToRegisterScreen();   // Al pulsar "Sign Up"
+        void navigateAsGuest();            // Iniciar sin cuenta
     }
 
     interface Presenter {
         void injectView(WeakReference<View> view);
-
         void injectModel(Model model);
 
-        void onResumeCalled();
-
         void onCreateCalled();
-
         void onRecreateCalled();
-
+        void onResumeCalled();
+        void onPauseCalled();
+        void onDestroyCalled();
         void onBackButtonPressed();
 
-        void onPauseCalled();
-
-        void onDestroyCalled();
+        void onLoginButtonClicked(String username, String password);
+        void onGuestButtonClicked();
+        void onSignUpClicked();
     }
 
     interface Model {
-        String getStoredData();
-
-        String getSavedData();
-
-        String getCurrentData();
-
-        void setCurrentData(String data);
-
-        void onUpdatedDataFromRecreatedScreen(String data);
-
-        void onUpdatedDataFromNextScreen(String data);
-
-        void onUpdatedDataFromPreviousScreen(String data);
+        boolean validateUser(String username, String password);
     }
-
 }
