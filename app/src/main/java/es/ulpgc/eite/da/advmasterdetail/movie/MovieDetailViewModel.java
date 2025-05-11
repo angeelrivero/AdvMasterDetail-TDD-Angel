@@ -5,6 +5,6 @@ import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
 
 public class MovieDetailViewModel {
 
-  public MovieItem product;
+  public MovieItem movie;
 }
 

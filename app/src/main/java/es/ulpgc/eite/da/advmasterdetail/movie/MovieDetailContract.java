@@ -7,24 +7,21 @@ interface MovieDetailContract {
   interface View {
     void injectPresenter(Presenter presenter);
 
-    void displayProductDetailData(MovieDetailViewModel viewModel);
+    void displayMovieDetailData(MovieDetailViewModel viewModel); // cambiado
   }
 
   interface Presenter {
     void injectView(WeakReference<View> view);
     void injectModel(Model model);
 
-    void fetchProductDetailData();
+    void fetchMovieDetailData();
 
     void onCreateCalled();
-
     void onRecreateCalled();
-
-      void onPauseCalled();
+    void onPauseCalled();
   }
 
   interface Model {
-
+    // Por ahora vacío, podrías añadir funciones si necesitas actualizar favoritos, por ejemplo
   }
-
 }

@@ -7,10 +7,9 @@ import java.lang.ref.WeakReference;
 import es.ulpgc.eite.da.advmasterdetail.app.CatalogMediator;
 import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
 
-
 public class MovieDetailPresenter implements MovieDetailContract.Presenter {
 
-  public static String TAG = "AdvMasterDetail.MovieDetailPresenter";
+  public static final String TAG = "MovieDetailPresenter";
 
   private WeakReference<MovieDetailContract.View> view;
   private MovieDetailState state;
@@ -23,53 +22,34 @@ public class MovieDetailPresenter implements MovieDetailContract.Presenter {
 
   @Override
   public void onCreateCalled() {
-    // Log.e(TAG, "onCreateCalled");
-
     state = new MovieDetailState();
   }
 
   @Override
   public void onRecreateCalled() {
-    // Log.e(TAG, "onRecreateCalled");
-
-    state = mediator.getProductDetailState();
+    state = mediator.getMovieDetailState();
   }
 
   @Override
   public void onPauseCalled() {
-    Log.e(TAG, "onPauseCalled()");
-
-    mediator.setProductDetailState(state);
+    mediator.setMovieDetailState(state);
   }
 
-
-  private MovieItem getDataFromProductListScreen() {
-
-    // set passed state
-    CategoryItem category = mediator.getCategory();
-
-    if (category != null) {
-      state.category = category;
-    }
-
-    MovieItem product = mediator.getProduct();
-    return product;
+  private MovieItem getMovieFromListScreen() {
+    return mediator.getSelectedMovie();
   }
-
 
   @Override
-  public void fetchProductDetailData() {
-    // Log.e(TAG, "fetchProductDetailData()");
-
-    // set passed state
-    MovieItem product = getDataFromProductListScreen();
-    if(product != null) {
-        state.product = product;
+  public void fetchMovieDetailData() {
+    MovieItem movie = getMovieFromListScreen();
+    if (movie != null) {
+      state.movie = movie;
     }
 
-    view.get().displayProductDetailData(state);
+    if (view.get() != null) {
+      view.get().displayMovieDetailData(state);
+    }
   }
-
 
   @Override
   public void injectView(WeakReference<MovieDetailContract.View> view) {
@@ -80,5 +60,4 @@ public class MovieDetailPresenter implements MovieDetailContract.Presenter {
   public void injectModel(MovieDetailContract.Model model) {
     this.model = model;
   }
-
 }

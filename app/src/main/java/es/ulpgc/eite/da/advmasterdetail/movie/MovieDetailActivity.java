@@ -16,28 +16,23 @@ import com.bumptech.glide.request.RequestOptions;
 import es.ulpgc.eite.da.advmasterdetail.R;
 import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
 
+public class MovieDetailActivity extends AppCompatActivity implements MovieDetailContract.View {
 
-public class MovieDetailActivity
-    extends AppCompatActivity implements MovieDetailContract.View {
+  public static final String TAG = "MovieDetailActivity";
 
-  public static String TAG = "AdvMasterDetail.MovieDetailActivity";
-
-  MovieDetailContract.Presenter presenter;
+  private MovieDetailContract.Presenter presenter;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_movie_detail);
-    setTitle(R.string.title_product_detail);
+    setContentView(R.layout.activity_movie_detail); // Asegúrate de tener este layout
+    setTitle(R.string.title_movie_detail); // Agrega en strings.xml
 
-    // do the setup
     MovieDetailScreen.configure(this);
 
-    // do some work
-    if(savedInstanceState == null) {
+    if (savedInstanceState == null) {
       presenter.onCreateCalled();
-
-    }else{
+    } else {
       presenter.onRecreateCalled();
     }
   }
@@ -45,38 +40,27 @@ public class MovieDetailActivity
   @Override
   protected void onResume() {
     super.onResume();
-
-    // do some work
-    presenter.fetchProductDetailData();
+    presenter.fetchMovieDetailData();
   }
 
   @Override
   protected void onPause() {
     super.onPause();
-
     presenter.onPauseCalled();
   }
 
   @Override
-  protected void onDestroy() {
-    super.onDestroy();
-  }
+  public void displayMovieDetailData(MovieDetailViewModel viewModel) {
+    Log.d(TAG, "displayMovieDetailData");
 
-  @Override
-  public void displayProductDetailData(MovieDetailViewModel viewModel) {
-    Log.e(TAG, "displayProductDetailData");
+    MovieItem movie = viewModel.movie;
+    if (movie != null) {
+      ((TextView) findViewById(R.id.movie_title)).setText(movie.title);
+      ((TextView) findViewById(R.id.movie_description)).setText(movie.description);
+      ((TextView) findViewById(R.id.movie_director)).setText("Director: " + movie.director);
+      ((TextView) findViewById(R.id.movie_duration)).setText("Duración: " + movie.duration + " min");
 
-    // deal with the data
-    MovieItem product = viewModel.product;
-
-    if (product != null) {
-
-      ((TextView) findViewById(R.id.product_detail)).setText(product.details);
-      loadImageFromURL(
-          (ImageView) findViewById(R.id.product_image),
-          product.picture
-      );
-
+      loadImageFromURL((ImageView) findViewById(R.id.movie_image), movie.posterUrl);
     }
   }
 
@@ -88,7 +72,6 @@ public class MovieDetailActivity
     reqBuilder.apply(reqOptions);
     reqBuilder.into(imageView);
   }
-
 
   @Override
   public void injectPresenter(MovieDetailContract.Presenter presenter) {
