@@ -47,7 +47,9 @@ public class CatalogRepository implements RepositoryContract {
 
     database = Room.databaseBuilder(
             context, CatalogDatabase.class, DB_FILE
-    ).build();
+    )
+            .fallbackToDestructiveMigration() // Esto permite borrar y recrear la base si cambia la versión
+            .build();
   }
 
   // Carga inicial del catálogo desde JSON si la base de datos está vacía
