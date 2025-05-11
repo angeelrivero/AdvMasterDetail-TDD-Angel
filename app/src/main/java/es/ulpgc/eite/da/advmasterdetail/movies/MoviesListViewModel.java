@@ -5,9 +5,8 @@ import java.util.List;
 import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
 
 
+// ViewModel que contiene los datos que se mostrarán en la vista (la lista de películas)
 public class MoviesListViewModel {
-
-  public List<MovieItem> products;
-
+  public List<MovieItem> movies;
 }
 

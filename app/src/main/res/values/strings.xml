@@ -1,10 +1,8 @@
 <resources>
     <string name="app_name">Adv Master-Detail</string>
 
-    <string name="title_category_list">Category List</string>
-    <string name="title_category_detail">Category Detail</string>
-    <string name="title_product_list">Products</string>
-    <string name="title_product_detail">Product Detail</string>
+    <string name="title_movie_list">Lista de Peliculas</string>
+    <string name="title_movie_detail">Movie Detail</string>
     <string name="item_content">Item Content</string>
     <string name="item_details">Item Details</string>
 </resources>

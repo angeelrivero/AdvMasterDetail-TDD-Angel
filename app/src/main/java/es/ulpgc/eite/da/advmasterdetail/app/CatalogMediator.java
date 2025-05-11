@@ -1,87 +1,58 @@
 package es.ulpgc.eite.da.advmasterdetail.app;
 
-import es.ulpgc.eite.da.advmasterdetail.categories.CategoryListState;
-import es.ulpgc.eite.da.advmasterdetail.data.CategoryItem;
 import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
 import es.ulpgc.eite.da.advmasterdetail.movie.MovieDetailState;
 import es.ulpgc.eite.da.advmasterdetail.movies.MoviesListState;
 
 public class CatalogMediator {
 
-//  private CategoryListState categoryListState = new CategoryListState();
-//  private MoviesListState moviesListState = new MoviesListState();
-//  private MovieDetailState movieDetailState = new MovieDetailState();
-
-  private CategoryListState categoryListState;
   private MoviesListState moviesListState;
   private MovieDetailState movieDetailState;
-  private CategoryItem category;
-  private MovieItem product;
 
+  private MovieItem selectedMovie;
 
   private static CatalogMediator INSTANCE;
 
-  private CatalogMediator() {
-
-  }
+  private CatalogMediator() {}
 
   public static void resetInstance() {
     INSTANCE = null;
   }
 
-
   public static CatalogMediator getInstance() {
-    if(INSTANCE == null){
+    if (INSTANCE == null) {
       INSTANCE = new CatalogMediator();
     }
-
     return INSTANCE;
   }
 
+  // --- Métodos para guardar/recuperar estado de la lista ---
 
-  public CategoryListState getCategoryListState() {
-    return categoryListState;
-  }
-
-  public MovieDetailState getProductDetailState() {
-    return movieDetailState;
-  }
-
-  public MoviesListState getProductListState() {
+  public MoviesListState getMoviesListState() {
     return moviesListState;
   }
 
-  public MovieItem getProduct() {
-    MovieItem item = product;
-    //product = null;
-    return item;
+  public void setMoviesListState(MoviesListState state) {
+    this.moviesListState = state;
   }
 
+  // --- Métodos para guardar/recuperar estado del detalle ---
 
-  public void setProduct(MovieItem item) {
-    product = item;
+  public MovieDetailState getMovieDetailState() {
+    return movieDetailState;
   }
 
-  public void setCategory(CategoryItem item) {
-    category = item;
+  public void setMovieDetailState(MovieDetailState state) {
+    this.movieDetailState = state;
   }
 
-  public CategoryItem getCategory() {
-    CategoryItem item = category;
-    //category = null;
-    return item;
+  // --- Película seleccionada (para detalle) ---
+
+  public MovieItem getSelectedMovie() {
+    return selectedMovie;
   }
 
-  public void setCategoryListState(CategoryListState state) {
-    categoryListState = state;
-  }
-
-  public void setProductListState(MoviesListState state) {
-    moviesListState =state;
-
-  }
-
-  public void setProductDetailState(MovieDetailState state) {
-    movieDetailState =state;
+  public void setSelectedMovie(MovieItem item) {
+    this.selectedMovie = item;
   }
 }

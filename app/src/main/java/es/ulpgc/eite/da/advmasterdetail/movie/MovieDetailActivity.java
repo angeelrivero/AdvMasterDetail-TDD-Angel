@@ -27,7 +27,7 @@ public class MovieDetailActivity
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_product_detail);
+    setContentView(R.layout.activity_movie_detail);
     setTitle(R.string.title_product_detail);
 
     // do the setup

@@ -12,91 +12,70 @@ import es.ulpgc.eite.da.advmasterdetail.R;
 import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
 import es.ulpgc.eite.da.advmasterdetail.movie.MovieDetailActivity;
 
+public class MoviesListActivity extends AppCompatActivity implements MoviesListContract.View {
 
-public class MoviesListActivity
-    extends AppCompatActivity implements MoviesListContract.View {
+  public static final String TAG = "MoviesListActivity";
 
-  public static String TAG = "AdvMasterDetail.MoviesListActivity";
-
-  MoviesListContract.Presenter presenter;
-
+  private MoviesListContract.Presenter presenter;
   private MoviesListAdapter listAdapter;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_product_list);
-    setTitle(R.string.title_product_list);
+    setContentView(R.layout.activity_movie_list); // Nos aseguramos de tener este layout
+    setTitle(R.string.title_movie_list); // Definimos este string en strings.xml
 
-    // do the setup
-    MoviesListScreen.configure(this);
+    MoviesListScreen.configure(this); // Inyección de dependencias MVP
 
-    initProductListContainer();
+    initMovieListContainer(); // Prepara RecyclerView
 
-    // do some work
-    if(savedInstanceState == null) {
+    if (savedInstanceState == null) {
       presenter.onCreateCalled();
-
-    }else{
+    } else {
       presenter.onRecreateCalled();
     }
   }
 
-
   @Override
   protected void onResume() {
     super.onResume();
-
-    // do some work
-    presenter.fetchProductListData();
+    presenter.fetchMovieListData(); // Solicita datos al modelo
   }
 
   @Override
   protected void onPause() {
     super.onPause();
-
-    presenter.onPauseCalled();
+    presenter.onPauseCalled(); // Guarda estado
   }
 
-  @Override
-  protected void onDestroy() {
-    super.onDestroy();
-  }
-
-  private void initProductListContainer() {
-
+  private void initMovieListContainer() {
+    // Configura adaptador con callback para clics en elementos
     listAdapter = new MoviesListAdapter(view -> {
       MovieItem item = (MovieItem) view.getTag();
-      presenter.selectedProductData(item);
+      presenter.selectedMovieData(item); // Informa al presenter del ítem clicado
     });
 
-    RecyclerView recyclerView = findViewById(R.id.product_recycler);
+    RecyclerView recyclerView = findViewById(R.id.movie_recycler); // Asegúrate que existe en el layout
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
     recyclerView.setAdapter(listAdapter);
   }
 
   @Override
-  public void navigateToProductDetailScreen() {
-    Intent intent = new Intent(this, MovieDetailActivity.class);
-    //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    startActivity(intent);
+  public void displayMovieListData(final MoviesListViewModel viewModel) {
+    Log.d(TAG, "displayMovieListData()");
+    runOnUiThread(() -> {
+      listAdapter.setItems(viewModel.movies); // Muestra las películas en la lista
+    });
   }
 
   @Override
-  public void displayProductListData(final MoviesListViewModel viewModel) {
-    Log.e(TAG, "displayProductListData");
-
-    runOnUiThread(() -> {
-
-      // deal with the data
-      listAdapter.setItems(viewModel.products);
-    });
-
+  public void navigateToMovieDetailScreen() {
+    Intent intent = new Intent(this, MovieDetailActivity.class);
+    startActivity(intent); // Navega al detalle
   }
 
   @Override
   public void injectPresenter(MoviesListContract.Presenter presenter) {
-    this.presenter = presenter;
+    this.presenter = presenter; // Inyección del Presenter
   }
-
 }

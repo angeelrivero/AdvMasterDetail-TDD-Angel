@@ -5,13 +5,11 @@ import android.util.Log;
 import java.lang.ref.WeakReference;
 
 import es.ulpgc.eite.da.advmasterdetail.app.CatalogMediator;
-import es.ulpgc.eite.da.advmasterdetail.data.CategoryItem;
 import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
-
 
 public class MoviesListPresenter implements MoviesListContract.Presenter {
 
-  public static String TAG = "AdvMasterDetail.MoviesListPresenter";
+  public static final String TAG = "MoviesListPresenter";
 
   private WeakReference<MoviesListContract.View> view;
   private MoviesListState state;
@@ -22,53 +20,47 @@ public class MoviesListPresenter implements MoviesListContract.Presenter {
     this.mediator = mediator;
   }
 
-
   @Override
   public void onCreateCalled() {
-    // Log.e(TAG, "onCreateCalled");
-
-    state = new MoviesListState();
+    Log.d(TAG, "onCreateCalled()");
+    state = new MoviesListState(); // inicializa el estado
+    fetchMovieListData(); // carga la lista desde el modelo
   }
 
   @Override
   public void onRecreateCalled() {
-    // Log.e(TAG, "onRecreateCalled");
-
-    state = mediator.getProductListState();
+    Log.d(TAG, "onRecreateCalled()");
+    state = mediator.getMoviesListState(); // recupera estado si se recrea
+    if (view.get() != null) {
+      view.get().displayMovieListData(state);
+    }
   }
 
   @Override
   public void onPauseCalled() {
-    Log.e(TAG, "onPauseCalled()");
-
-    mediator.setProductListState(state);
+    Log.d(TAG, "onPauseCalled()");
+    mediator.setMoviesListState(state); // guarda el estado
   }
 
-
   @Override
-  public void fetchProductListData() {
-    // Log.e(TAG, "fetchProductListData()");
+  public void fetchMovieListData() {
+    Log.d(TAG, "fetchMovieListData()");
 
-    // set passed state
-    CategoryItem category = mediator.getCategory();
-
-    if (category != null) {
-      state.category = category;
-    }
-
-    // call the model
-    model.fetchProductListData(state.category, products -> {
-      state.products = products;
-
-      view.get().displayProductListData(state);
+    model.fetchMovieList(movies -> {
+      state.movies = movies;
+      if (view.get() != null) {
+        view.get().displayMovieListData(state);
+      }
     });
-
   }
 
   @Override
-  public void selectedProductData(MovieItem item) {
-    mediator.setProduct(item);
-    view.get().navigateToProductDetailScreen();
+  public void selectedMovieData(MovieItem item) {
+    Log.d(TAG, "selectedMovieData(): " + item.title);
+    mediator.setSelectedMovie(item); // guarda la película seleccionada
+    if (view.get() != null) {
+      view.get().navigateToMovieDetailScreen(); // navega al detalle
+    }
   }
 
   @Override
@@ -80,6 +72,4 @@ public class MoviesListPresenter implements MoviesListContract.Presenter {
   public void injectModel(MoviesListContract.Model model) {
     this.model = model;
   }
-
-
 }

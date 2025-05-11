@@ -3,7 +3,6 @@ package es.ulpgc.eite.da.advmasterdetail.database;
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
-import es.ulpgc.eite.da.advmasterdetail.data.CategoryItem;
 import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
 
 

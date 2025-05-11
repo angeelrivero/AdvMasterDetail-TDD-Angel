@@ -1,40 +1,41 @@
 package es.ulpgc.eite.da.advmasterdetail.movies;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
 
-import es.ulpgc.eite.da.advmasterdetail.data.CategoryItem;
 import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
 import es.ulpgc.eite.da.advmasterdetail.data.RepositoryContract;
 
-
-interface MoviesListContract {
+public interface MoviesListContract {
 
   interface View {
     void injectPresenter(Presenter presenter);
 
-    void displayProductListData(MoviesListViewModel viewModel);
+    // Mostrar los datos en pantalla
+    void displayMovieListData(MoviesListViewModel viewModel);
 
-    void navigateToProductDetailScreen();
+    // Navegar al detalle
+    void navigateToMovieDetailScreen();
   }
 
   interface Presenter {
     void injectView(WeakReference<View> view);
     void injectModel(Model model);
 
-    void fetchProductListData();
-    void selectedProductData(MovieItem item);
+    // Cargar los datos desde el modelo
+    void fetchMovieListData();
 
+    // Guardar el item seleccionado para ir al detalle
+    void selectedMovieData(MovieItem item);
+
+    // Ciclo de vida
     void onCreateCalled();
-
     void onRecreateCalled();
-
-      void onPauseCalled();
+    void onPauseCalled();
   }
 
   interface Model {
-
-    void fetchProductListData(
-            CategoryItem category, RepositoryContract.GetProductListCallback callback);
+    // Pide los datos al repositorio
+    void fetchMovieList(RepositoryContract.GetMovieListCallback callback);
   }
-
 }
