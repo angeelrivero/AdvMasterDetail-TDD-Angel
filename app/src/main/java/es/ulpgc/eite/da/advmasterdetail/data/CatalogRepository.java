@@ -21,30 +21,24 @@ import java.util.Arrays;
 import java.util.List;
 
 import es.ulpgc.eite.da.advmasterdetail.database.CatalogDatabase;
-import es.ulpgc.eite.da.advmasterdetail.database.CategoryDao;
 import es.ulpgc.eite.da.advmasterdetail.database.MovieDao;
-
 
 public class CatalogRepository implements RepositoryContract {
 
-  public static String TAG = CatalogRepository.class.getSimpleName();
-
-
+  public static final String TAG = CatalogRepository.class.getSimpleName();
   public static final String DB_FILE = "catalog.db";
   public static final String JSON_FILE = "catalog.json";
-  public static final String JSON_ROOT = "categories";
+  public static final String JSON_ROOT = "movies";
 
   private static CatalogRepository INSTANCE;
 
-  private CatalogDatabase database;
-  private Context context;
-
+  private final CatalogDatabase database;
+  private final Context context;
 
   public static RepositoryContract getInstance(Context context) {
-    if(INSTANCE == null){
+    if (INSTANCE == null) {
       INSTANCE = new CatalogRepository(context);
     }
-
     return INSTANCE;
   }
 
@@ -52,194 +46,79 @@ public class CatalogRepository implements RepositoryContract {
     this.context = context;
 
     database = Room.databaseBuilder(
-        context, CatalogDatabase.class, DB_FILE
+            context, CatalogDatabase.class, DB_FILE
     ).build();
-
   }
 
+  // Carga inicial del catálogo desde JSON si la base de datos está vacía
   @Override
-  public void loadCatalog(
-      final boolean clearFirst, final FetchCatalogDataCallback callback) {
-
+  public void loadCatalog(final boolean clearFirst, final FetchCatalogDataCallback callback) {
     AsyncTask.execute(() -> {
-      if(clearFirst) {
+      if (clearFirst) {
         database.clearAllTables();
       }
 
       boolean error = false;
-      if(getCategoryDao().loadCategories().size() == 0 ) {
-        error = !loadCatalogFromJSON(loadJSONFromAsset());
+
+      if (getMovieDao().loadMovies().isEmpty()) {
+        error = !loadMoviesFromJSON(loadJSONFromAsset());
       }
 
-      if(callback != null) {
+      if (callback != null) {
         callback.onCatalogDataFetched(error);
       }
     });
-
   }
 
+  // Obtener la lista completa de películas
   @Override
-  public void getProductList(
-      final CategoryItem category, final GetProductListCallback callback) {
-
-    getProductList(category.id, callback);
-  }
-
-
-  @Override
-  public void getProductList(
-      final int categoryId, final GetProductListCallback callback) {
-
+  public void getMovieList(final GetMovieListCallback callback) {
     AsyncTask.execute(() -> {
-      if(callback != null) {
-        callback.setProductList(getProductDao().loadProducts(categoryId));
-      }
-    });
-
-  }
-
-
-  @Override
-  public void getProduct(final int id, final GetProductCallback callback) {
-
-    AsyncTask.execute(() -> {
-      if(callback != null) {
-        callback.setProduct(getProductDao().loadProduct(id));
+      if (callback != null) {
+        callback.setMovieList(getMovieDao().loadMovies());
       }
     });
   }
 
+  // Obtener una película por ID
   @Override
-  public void getCategory(final int id, final GetCategoryCallback callback) {
-
+  public void getMovie(final int id, final GetMovieCallback callback) {
     AsyncTask.execute(() -> {
-      if(callback != null) {
-        callback.setCategory(getCategoryDao().loadCategory(id));
-      }
-    });
-
-  }
-
-  @Override
-  public void getCategoryList(final GetCategoryListCallback callback) {
-    AsyncTask.execute(() -> {
-      if(callback != null) {
-        callback.setCategoryList(getCategoryDao().loadCategories());
-      }
-    });
-
-  }
-
-  @Override
-  public void deleteProduct(
-          final MovieItem product, final DeleteProductCallback callback) {
-
-    AsyncTask.execute(() -> {
-      if(callback != null) {
-        getProductDao().deleteProduct(product);
-        callback.onProductDeleted();
+      if (callback != null) {
+        callback.setMovie(getMovieDao().loadMovie(id));
       }
     });
   }
 
+  // Eliminar una película
   @Override
-  public void updateProduct(
-          final MovieItem product, final UpdateProductCallback callback) {
-
+  public void deleteMovie(final MovieItem movie, final DeleteMovieCallback callback) {
     AsyncTask.execute(() -> {
-      if(callback != null) {
-        getProductDao().updateProduct(product);
-        callback.onProductUpdated();
-      }
+      getMovieDao().deleteMovie(movie);
+      if (callback != null) callback.onMovieDeleted();
     });
   }
 
-
+  // Actualizar una película
   @Override
-  public void deleteCategory(
-      final CategoryItem category, final DeleteCategoryCallback callback) {
-
+  public void updateMovie(final MovieItem movie, final UpdateMovieCallback callback) {
     AsyncTask.execute(() -> {
-      if(callback != null) {
-        getCategoryDao().deleteCategory(category);
-        callback.onCategoryDeleted();
-      }
+      getMovieDao().updateMovie(movie);
+      if (callback != null) callback.onMovieUpdated();
     });
   }
 
-  @Override
-  public void updateCategory(
-      final CategoryItem category, final UpdateCategoryCallback callback) {
-
-    AsyncTask.execute(() -> {
-      if(callback != null) {
-        getCategoryDao().updateCategory(category);
-        callback.onCategoryUpdated();
-      }
-    });
+  // Acceso al DAO de películas
+  private MovieDao getMovieDao() {
+    return database.movieDao();
   }
 
-
-  private CategoryDao getCategoryDao() {
-    return database.categoryDao();
-  }
-
-  private MovieDao getProductDao() {
-    return database.productDao();
-  }
-
-
-  private boolean loadCatalogFromJSON(String json) {
-    Log.e(TAG, "loadCatalogFromJSON()");
-
-    GsonBuilder gsonBuilder = new GsonBuilder();
-    Gson gson = gsonBuilder.create();
-
-    try {
-
-      JSONObject jsonObject = new JSONObject(json);
-      JSONArray jsonArray = jsonObject.getJSONArray(JSON_ROOT);
-
-      if (jsonArray.length() > 0) {
-
-        final List<CategoryItem> categories = Arrays.asList(
-            gson.fromJson(jsonArray.toString(), CategoryItem[].class)
-        );
-
-        for (CategoryItem category: categories) {
-          getCategoryDao().insertCategory(category);
-        }
-
-        for (CategoryItem category: categories) {
-          for (MovieItem product: category.items) {
-            product.categoryId = category.id;
-            getProductDao().insertProduct(product);
-          }
-        }
-
-        return true;
-      }
-
-    } catch (JSONException error) {
-      Log.e(TAG, "error: " + error);
-    }
-
-    return false;
-  }
-
-
-
-  private String loadJSONFromAsset( )  {
-
-    //Log.e(TAG, "loadJSONFromAsset()");
-
+  // Leer el archivo JSON desde assets
+  private String loadJSONFromAsset() {
     String json = null;
-
     try {
-
       InputStream inputStream = context.getAssets().open(JSON_FILE);
-      BufferedReader reader =
-              new BufferedReader(new InputStreamReader(inputStream));
+      BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
       StringBuilder stringBuilder = new StringBuilder();
       String line;
 
@@ -250,14 +129,39 @@ public class CatalogRepository implements RepositoryContract {
       reader.close();
       json = stringBuilder.toString();
 
-      //Log.e(TAG, "JSON: " + json);
-
     } catch (IOException error) {
-      Log.e(TAG, "error: " + error);
+      Log.e(TAG, "Error leyendo JSON: " + error);
     }
 
     return json;
   }
 
+  // Parsear y guardar las películas del JSON en la base de datos
+  private boolean loadMoviesFromJSON(String json) {
+    Log.d(TAG, "Cargando películas desde JSON");
 
+    Gson gson = new GsonBuilder().create();
+
+    try {
+      JSONObject jsonObject = new JSONObject(json);
+      JSONArray jsonArray = jsonObject.getJSONArray(JSON_ROOT);
+
+      if (jsonArray.length() > 0) {
+        List<MovieItem> movies = Arrays.asList(
+                gson.fromJson(jsonArray.toString(), MovieItem[].class)
+        );
+
+        for (MovieItem movie : movies) {
+          getMovieDao().insertMovie(movie);
+        }
+
+        return true;
+      }
+
+    } catch (JSONException e) {
+      Log.e(TAG, "Error parseando JSON: " + e);
+    }
+
+    return false;
+  }
 }
