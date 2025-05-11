@@ -52,8 +52,7 @@ public class MoviesListAdapter
 
   @Override
   public void onBindViewHolder(final ViewHolder holder, int position) {
-    holder.contentView.setText(itemList.get(position).content);
-
+    holder.contentView.setText(itemList.get(position).title);
     holder.itemView.setTag(itemList.get(position));
     holder.itemView.setOnClickListener(clickListener);
   }
@@ -68,7 +67,7 @@ public class MoviesListAdapter
 
     ViewHolder(View view) {
       super(view);
-      contentView = view.findViewById(R.id.product_name);
+      contentView = view.findViewById(R.id.movie_title);
     }
   }
 }
