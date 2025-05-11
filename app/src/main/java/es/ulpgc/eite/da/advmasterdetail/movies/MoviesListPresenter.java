@@ -5,6 +5,7 @@ import android.util.Log;
 import java.lang.ref.WeakReference;
 
 import es.ulpgc.eite.da.advmasterdetail.app.CatalogMediator;
+import es.ulpgc.eite.da.advmasterdetail.data.CatalogRepository;
 import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
 
 public class MoviesListPresenter implements MoviesListContract.Presenter {
@@ -23,8 +24,15 @@ public class MoviesListPresenter implements MoviesListContract.Presenter {
   @Override
   public void onCreateCalled() {
     Log.d(TAG, "onCreateCalled()");
-    state = new MoviesListState(); // inicializa el estado
-    fetchMovieListData(); // carga la lista desde el modelo
+    state = new MoviesListState();
+
+    // llama al método del modelo
+    model.fetchMovieList(movies -> {
+      state.movies = movies;
+      if (view.get() != null) {
+        view.get().displayMovieListData(state);
+      }
+    });
   }
 
   @Override
@@ -44,10 +52,12 @@ public class MoviesListPresenter implements MoviesListContract.Presenter {
 
   @Override
   public void fetchMovieListData() {
-    Log.d(TAG, "fetchMovieListData()");
+    Log.d(TAG, "fetchMovieListData() desde presenter");
 
     model.fetchMovieList(movies -> {
+      Log.d(TAG, "Películas recibidas en presenter: " + movies.size());
       state.movies = movies;
+
       if (view.get() != null) {
         view.get().displayMovieListData(state);
       }

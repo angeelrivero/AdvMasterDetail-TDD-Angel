@@ -3,9 +3,12 @@ package es.ulpgc.eite.da.advmasterdetail.movies;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,8 +55,14 @@ public class MoviesListAdapter
 
   @Override
   public void onBindViewHolder(final ViewHolder holder, int position) {
-    holder.contentView.setText(itemList.get(position).title);
-    holder.itemView.setTag(itemList.get(position));
+    MovieItem movie = itemList.get(position);
+
+    holder.titleView.setText(movie.title);
+    Glide.with(holder.itemView.getContext())
+            .load(movie.posterUrl)
+            .into(holder.imageView);
+
+    holder.itemView.setTag(movie);
     holder.itemView.setOnClickListener(clickListener);
   }
 
@@ -63,11 +72,13 @@ public class MoviesListAdapter
   }
 
   class ViewHolder extends RecyclerView.ViewHolder {
-    final TextView contentView;
+    final ImageView imageView;
+    final TextView titleView;
 
     ViewHolder(View view) {
       super(view);
-      contentView = view.findViewById(R.id.movie_title);
+      imageView = view.findViewById(R.id.movie_image);
+      titleView = view.findViewById(R.id.movie_title);
     }
   }
 }

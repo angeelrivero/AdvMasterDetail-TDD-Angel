@@ -17,6 +17,7 @@ import java.util.List;
 public class MovieItem {
   @PrimaryKey
   public int id;
+
   public String title;
   public int year;
   public int duration;

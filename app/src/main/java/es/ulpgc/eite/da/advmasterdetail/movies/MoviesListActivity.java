@@ -62,9 +62,10 @@ public class MoviesListActivity extends AppCompatActivity implements MoviesListC
 
   @Override
   public void displayMovieListData(final MoviesListViewModel viewModel) {
-    Log.d(TAG, "displayMovieListData()");
+    Log.d(TAG, "displayMovieListData() con " + viewModel.movies.size() + " películas");
+
     runOnUiThread(() -> {
-      listAdapter.setItems(viewModel.movies); // Muestra las películas en la lista
+      listAdapter.setItems(viewModel.movies);
     });
   }
 

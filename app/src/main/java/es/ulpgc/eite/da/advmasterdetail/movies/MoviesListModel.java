@@ -19,14 +19,15 @@ public class MoviesListModel implements MoviesListContract.Model {
 
   @Override
   public void fetchMovieList(final RepositoryContract.GetMovieListCallback callback) {
-    Log.d(TAG, "fetchMovieList()");
+    Log.d(TAG, "fetchMovieList() desde modelo");
 
-    // Llama al repositorio para obtener la lista de películas
-    repository.getMovieList(new RepositoryContract.GetMovieListCallback() {
-      @Override
-      public void setMovieList(List<MovieItem> movies) {
-        callback.setMovieList(movies); // Devuelve la lista al presentador
-      }
+    repository.loadCatalog(true, error -> {
+      Log.d(TAG, "¿Hubo error cargando catálogo?: " + error);
+      repository.getMovieList(movies -> {
+        Log.d(TAG, "Películas cargadas: " + movies.size());
+        callback.setMovieList(movies);
+      });
     });
   }
+
 }

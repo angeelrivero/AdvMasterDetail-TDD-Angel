@@ -73,11 +73,13 @@ public class CatalogRepository implements RepositoryContract {
   }
 
   // Obtener la lista completa de películas
-  @Override
   public void getMovieList(final GetMovieListCallback callback) {
     AsyncTask.execute(() -> {
+      List<MovieItem> movies = getMovieDao().loadMovies();
+      Log.d(TAG, "Películas encontradas en base de datos: " + movies.size());
+
       if (callback != null) {
-        callback.setMovieList(getMovieDao().loadMovies());
+        callback.setMovieList(movies);
       }
     });
   }
@@ -138,9 +140,11 @@ public class CatalogRepository implements RepositoryContract {
     return json;
   }
 
+
+
   // Parsear y guardar las películas del JSON en la base de datos
   private boolean loadMoviesFromJSON(String json) {
-    Log.d(TAG, "Cargando películas desde JSON");
+    Log.d(TAG, "Cargando películas desde JSON...");
 
     Gson gson = new GsonBuilder().create();
 
@@ -148,13 +152,18 @@ public class CatalogRepository implements RepositoryContract {
       JSONObject jsonObject = new JSONObject(json);
       JSONArray jsonArray = jsonObject.getJSONArray(JSON_ROOT);
 
+      Log.d(TAG, "Películas en el JSON: " + jsonArray.length());
+
       if (jsonArray.length() > 0) {
         List<MovieItem> movies = Arrays.asList(
                 gson.fromJson(jsonArray.toString(), MovieItem[].class)
         );
 
+        Log.d(TAG, "Películas parseadas correctamente: " + movies.size());
+
         for (MovieItem movie : movies) {
           getMovieDao().insertMovie(movie);
+          Log.d(TAG, "Insertada: " + movie.title);
         }
 
         return true;
@@ -166,4 +175,5 @@ public class CatalogRepository implements RepositoryContract {
 
     return false;
   }
+
 }

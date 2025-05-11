@@ -55,8 +55,8 @@ public class MovieDetailActivity extends AppCompatActivity implements MovieDetai
 
     MovieItem movie = viewModel.movie;
     if (movie != null) {
-      ((TextView) findViewById(R.id.movie_title)).setText(movie.title);
-      ((TextView) findViewById(R.id.movie_description)).setText(movie.description);
+      ((TextView) findViewById(R.id.movie_title)).setText("Titulo: " + movie.title);
+      ((TextView) findViewById(R.id.movie_description)).setText("Sinopsis: " +movie.description);
       ((TextView) findViewById(R.id.movie_director)).setText("Director: " + movie.director);
       ((TextView) findViewById(R.id.movie_duration)).setText("Duración: " + movie.duration + " min");
 
