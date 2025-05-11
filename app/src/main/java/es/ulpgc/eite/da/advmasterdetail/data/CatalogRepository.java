@@ -132,7 +132,7 @@ public class CatalogRepository implements RepositoryContract {
 
   @Override
   public void deleteProduct(
-      final ProductItem product, final DeleteProductCallback callback) {
+          final MovieItem product, final DeleteProductCallback callback) {
 
     AsyncTask.execute(() -> {
       if(callback != null) {
@@ -144,7 +144,7 @@ public class CatalogRepository implements RepositoryContract {
 
   @Override
   public void updateProduct(
-      final ProductItem product, final UpdateProductCallback callback) {
+          final MovieItem product, final UpdateProductCallback callback) {
 
     AsyncTask.execute(() -> {
       if(callback != null) {
@@ -211,7 +211,7 @@ public class CatalogRepository implements RepositoryContract {
         }
 
         for (CategoryItem category: categories) {
-          for (ProductItem product: category.items) {
+          for (MovieItem product: category.items) {
             product.categoryId = category.id;
             getProductDao().insertProduct(product);
           }

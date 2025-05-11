@@ -21,7 +21,7 @@ public class CategoryItem {
 
   @Ignore
   @SerializedName("products")
-  public List<ProductItem> items;
+  public List<MovieItem> items;
 
   @Override
   public String toString() {

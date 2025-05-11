@@ -1,13 +1,13 @@
-package es.ulpgc.eite.da.advmasterdetail.product;
+package es.ulpgc.eite.da.advmasterdetail.movie;
 
 import java.lang.ref.WeakReference;
 
-interface ProductDetailContract {
+interface MovieDetailContract {
 
   interface View {
     void injectPresenter(Presenter presenter);
 
-    void displayProductDetailData(ProductDetailViewModel viewModel);
+    void displayProductDetailData(MovieDetailViewModel viewModel);
   }
 
   interface Presenter {

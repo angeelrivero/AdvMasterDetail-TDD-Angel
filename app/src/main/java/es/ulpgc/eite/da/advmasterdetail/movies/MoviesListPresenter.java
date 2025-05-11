@@ -1,26 +1,24 @@
-package es.ulpgc.eite.da.advmasterdetail.products;
+package es.ulpgc.eite.da.advmasterdetail.movies;
 
 import android.util.Log;
 
 import java.lang.ref.WeakReference;
-import java.util.List;
 
 import es.ulpgc.eite.da.advmasterdetail.app.CatalogMediator;
 import es.ulpgc.eite.da.advmasterdetail.data.CategoryItem;
-import es.ulpgc.eite.da.advmasterdetail.data.ProductItem;
-import es.ulpgc.eite.da.advmasterdetail.data.RepositoryContract;
+import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
 
 
-public class ProductListPresenter implements ProductListContract.Presenter {
+public class MoviesListPresenter implements MoviesListContract.Presenter {
 
-  public static String TAG = "AdvMasterDetail.ProductListPresenter";
+  public static String TAG = "AdvMasterDetail.MoviesListPresenter";
 
-  private WeakReference<ProductListContract.View> view;
-  private ProductListState state;
-  private ProductListContract.Model model;
+  private WeakReference<MoviesListContract.View> view;
+  private MoviesListState state;
+  private MoviesListContract.Model model;
   private CatalogMediator mediator;
 
-  public ProductListPresenter(CatalogMediator mediator) {
+  public MoviesListPresenter(CatalogMediator mediator) {
     this.mediator = mediator;
   }
 
@@ -29,7 +27,7 @@ public class ProductListPresenter implements ProductListContract.Presenter {
   public void onCreateCalled() {
     // Log.e(TAG, "onCreateCalled");
 
-    state = new ProductListState();
+    state = new MoviesListState();
   }
 
   @Override
@@ -68,18 +66,18 @@ public class ProductListPresenter implements ProductListContract.Presenter {
   }
 
   @Override
-  public void selectedProductData(ProductItem item) {
+  public void selectedProductData(MovieItem item) {
     mediator.setProduct(item);
     view.get().navigateToProductDetailScreen();
   }
 
   @Override
-  public void injectView(WeakReference<ProductListContract.View> view) {
+  public void injectView(WeakReference<MoviesListContract.View> view) {
     this.view = view;
   }
 
   @Override
-  public void injectModel(ProductListContract.Model model) {
+  public void injectModel(MoviesListContract.Model model) {
     this.model = model;
   }
 

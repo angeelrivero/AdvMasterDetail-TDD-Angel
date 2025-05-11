@@ -1,4 +1,4 @@
-package es.ulpgc.eite.da.advmasterdetail.product;
+package es.ulpgc.eite.da.advmasterdetail.movie;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -7,17 +7,17 @@ import java.lang.ref.WeakReference;
 import es.ulpgc.eite.da.advmasterdetail.app.CatalogMediator;
 
 
-public class ProductDetailScreen {
+public class MovieDetailScreen {
 
-  public static void configure(ProductDetailContract.View view) {
+  public static void configure(MovieDetailContract.View view) {
 
     WeakReference<FragmentActivity> context =
         new WeakReference<>((FragmentActivity) view);
 
     CatalogMediator mediator = CatalogMediator.getInstance();
-    ProductDetailContract.Presenter presenter=new ProductDetailPresenter(mediator);
+    MovieDetailContract.Presenter presenter=new MovieDetailPresenter(mediator);
 
-    ProductDetailModel model = new ProductDetailModel();
+    MovieDetailModel model = new MovieDetailModel();
 
     presenter.injectView(new WeakReference<>(view));
     presenter.injectModel(model);

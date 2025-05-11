@@ -1,18 +1,18 @@
-package es.ulpgc.eite.da.advmasterdetail.products;
+package es.ulpgc.eite.da.advmasterdetail.movies;
 
 import java.lang.ref.WeakReference;
 
 import es.ulpgc.eite.da.advmasterdetail.data.CategoryItem;
-import es.ulpgc.eite.da.advmasterdetail.data.ProductItem;
+import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
 import es.ulpgc.eite.da.advmasterdetail.data.RepositoryContract;
 
 
-interface ProductListContract {
+interface MoviesListContract {
 
   interface View {
     void injectPresenter(Presenter presenter);
 
-    void displayProductListData(ProductListViewModel viewModel);
+    void displayProductListData(MoviesListViewModel viewModel);
 
     void navigateToProductDetailScreen();
   }
@@ -22,7 +22,7 @@ interface ProductListContract {
     void injectModel(Model model);
 
     void fetchProductListData();
-    void selectedProductData(ProductItem item);
+    void selectedProductData(MovieItem item);
 
     void onCreateCalled();
 

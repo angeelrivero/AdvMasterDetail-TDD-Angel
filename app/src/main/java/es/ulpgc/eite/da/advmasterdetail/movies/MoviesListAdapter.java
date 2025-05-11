@@ -1,4 +1,4 @@
-package es.ulpgc.eite.da.advmasterdetail.products;
+package es.ulpgc.eite.da.advmasterdetail.movies;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,34 +11,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.ulpgc.eite.da.advmasterdetail.R;
-import es.ulpgc.eite.da.advmasterdetail.data.ProductItem;
+import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
 
 
-public class ProductListAdapter
-    extends RecyclerView.Adapter<ProductListAdapter.ViewHolder> {
+public class MoviesListAdapter
+    extends RecyclerView.Adapter<MoviesListAdapter.ViewHolder> {
 
-  private List<ProductItem> itemList;
+  private List<MovieItem> itemList;
   private final View.OnClickListener clickListener;
 
 
-  public ProductListAdapter(View.OnClickListener listener) {
+  public MoviesListAdapter(View.OnClickListener listener) {
 
     itemList = new ArrayList();
     clickListener = listener;
   }
 
 
-  public void addItem(ProductItem item){
+  public void addItem(MovieItem item){
     itemList.add(item);
     notifyDataSetChanged();
   }
 
-  public void addItems(List<ProductItem> items){
+  public void addItems(List<MovieItem> items){
     itemList.addAll(items);
     notifyDataSetChanged();
   }
 
-  public void setItems(List<ProductItem> items){
+  public void setItems(List<MovieItem> items){
     itemList = items;
     notifyDataSetChanged();
   }

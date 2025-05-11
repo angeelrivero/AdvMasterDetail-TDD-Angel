@@ -28,11 +28,11 @@
         </activity>
 
         <activity
-            android:name=".products.ProductListActivity"
+            android:name=".movies.MoviesListActivity"
             android:exported="false"/>
 
         <activity
-            android:name=".product.ProductDetailActivity"
+            android:name=".movie.MovieDetailActivity"
             android:exported="false"/>
     </application>
 

@@ -2,21 +2,21 @@ package es.ulpgc.eite.da.advmasterdetail.app;
 
 import es.ulpgc.eite.da.advmasterdetail.categories.CategoryListState;
 import es.ulpgc.eite.da.advmasterdetail.data.CategoryItem;
-import es.ulpgc.eite.da.advmasterdetail.data.ProductItem;
-import es.ulpgc.eite.da.advmasterdetail.product.ProductDetailState;
-import es.ulpgc.eite.da.advmasterdetail.products.ProductListState;
+import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
+import es.ulpgc.eite.da.advmasterdetail.movie.MovieDetailState;
+import es.ulpgc.eite.da.advmasterdetail.movies.MoviesListState;
 
 public class CatalogMediator {
 
 //  private CategoryListState categoryListState = new CategoryListState();
-//  private ProductListState productListState = new ProductListState();
-//  private ProductDetailState productDetailState = new ProductDetailState();
+//  private MoviesListState moviesListState = new MoviesListState();
+//  private MovieDetailState movieDetailState = new MovieDetailState();
 
   private CategoryListState categoryListState;
-  private ProductListState productListState;
-  private ProductDetailState productDetailState;
+  private MoviesListState moviesListState;
+  private MovieDetailState movieDetailState;
   private CategoryItem category;
-  private ProductItem product;
+  private MovieItem product;
 
 
   private static CatalogMediator INSTANCE;
@@ -43,22 +43,22 @@ public class CatalogMediator {
     return categoryListState;
   }
 
-  public ProductDetailState getProductDetailState() {
-    return productDetailState;
+  public MovieDetailState getProductDetailState() {
+    return movieDetailState;
   }
 
-  public ProductListState getProductListState() {
-    return productListState;
+  public MoviesListState getProductListState() {
+    return moviesListState;
   }
 
-  public ProductItem getProduct() {
-    ProductItem item = product;
+  public MovieItem getProduct() {
+    MovieItem item = product;
     //product = null;
     return item;
   }
 
 
-  public void setProduct(ProductItem item) {
+  public void setProduct(MovieItem item) {
     product = item;
   }
 
@@ -76,12 +76,12 @@ public class CatalogMediator {
     categoryListState = state;
   }
 
-  public void setProductListState(ProductListState state) {
-    productListState=state;
+  public void setProductListState(MoviesListState state) {
+    moviesListState =state;
 
   }
 
-  public void setProductDetailState(ProductDetailState state) {
-    productDetailState=state;
+  public void setProductDetailState(MovieDetailState state) {
+    movieDetailState =state;
   }
 }

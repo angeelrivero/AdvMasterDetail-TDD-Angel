@@ -1,25 +1,24 @@
-package es.ulpgc.eite.da.advmasterdetail.product;
+package es.ulpgc.eite.da.advmasterdetail.movie;
 
 import android.util.Log;
 
 import java.lang.ref.WeakReference;
 
 import es.ulpgc.eite.da.advmasterdetail.app.CatalogMediator;
-import es.ulpgc.eite.da.advmasterdetail.categories.CategoryListState;
 import es.ulpgc.eite.da.advmasterdetail.data.CategoryItem;
-import es.ulpgc.eite.da.advmasterdetail.data.ProductItem;
+import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
 
 
-public class ProductDetailPresenter implements ProductDetailContract.Presenter {
+public class MovieDetailPresenter implements MovieDetailContract.Presenter {
 
-  public static String TAG = "AdvMasterDetail.ProductDetailPresenter";
+  public static String TAG = "AdvMasterDetail.MovieDetailPresenter";
 
-  private WeakReference<ProductDetailContract.View> view;
-  private ProductDetailState state;
-  private ProductDetailContract.Model model;
+  private WeakReference<MovieDetailContract.View> view;
+  private MovieDetailState state;
+  private MovieDetailContract.Model model;
   private CatalogMediator mediator;
 
-  public ProductDetailPresenter(CatalogMediator mediator) {
+  public MovieDetailPresenter(CatalogMediator mediator) {
     this.mediator = mediator;
   }
 
@@ -27,7 +26,7 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
   public void onCreateCalled() {
     // Log.e(TAG, "onCreateCalled");
 
-    state = new ProductDetailState();
+    state = new MovieDetailState();
   }
 
   @Override
@@ -45,7 +44,7 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
   }
 
 
-  private ProductItem getDataFromProductListScreen() {
+  private MovieItem getDataFromProductListScreen() {
 
     // set passed state
     CategoryItem category = mediator.getCategory();
@@ -54,7 +53,7 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
       state.category = category;
     }
 
-    ProductItem product = mediator.getProduct();
+    MovieItem product = mediator.getProduct();
     return product;
   }
 
@@ -64,7 +63,7 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
     // Log.e(TAG, "fetchProductDetailData()");
 
     // set passed state
-    ProductItem product = getDataFromProductListScreen();
+    MovieItem product = getDataFromProductListScreen();
     if(product != null) {
         state.product = product;
     }
@@ -74,12 +73,12 @@ public class ProductDetailPresenter implements ProductDetailContract.Presenter {
 
 
   @Override
-  public void injectView(WeakReference<ProductDetailContract.View> view) {
+  public void injectView(WeakReference<MovieDetailContract.View> view) {
     this.view = view;
   }
 
   @Override
-  public void injectModel(ProductDetailContract.Model model) {
+  public void injectModel(MovieDetailContract.Model model) {
     this.model = model;
   }
 

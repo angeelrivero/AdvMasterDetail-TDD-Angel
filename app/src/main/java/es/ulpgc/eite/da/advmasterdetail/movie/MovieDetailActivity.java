@@ -1,15 +1,11 @@
-package es.ulpgc.eite.da.advmasterdetail.product;
+package es.ulpgc.eite.da.advmasterdetail.movie;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
@@ -18,16 +14,15 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 
 import es.ulpgc.eite.da.advmasterdetail.R;
-import es.ulpgc.eite.da.advmasterdetail.data.ProductItem;
-import es.ulpgc.eite.da.advmasterdetail.products.ProductListActivity;
+import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
 
 
-public class ProductDetailActivity
-    extends AppCompatActivity implements ProductDetailContract.View {
+public class MovieDetailActivity
+    extends AppCompatActivity implements MovieDetailContract.View {
 
-  public static String TAG = "AdvMasterDetail.ProductDetailActivity";
+  public static String TAG = "AdvMasterDetail.MovieDetailActivity";
 
-  ProductDetailContract.Presenter presenter;
+  MovieDetailContract.Presenter presenter;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +31,7 @@ public class ProductDetailActivity
     setTitle(R.string.title_product_detail);
 
     // do the setup
-    ProductDetailScreen.configure(this);
+    MovieDetailScreen.configure(this);
 
     // do some work
     if(savedInstanceState == null) {
@@ -68,11 +63,11 @@ public class ProductDetailActivity
   }
 
   @Override
-  public void displayProductDetailData(ProductDetailViewModel viewModel) {
+  public void displayProductDetailData(MovieDetailViewModel viewModel) {
     Log.e(TAG, "displayProductDetailData");
 
     // deal with the data
-    ProductItem product = viewModel.product;
+    MovieItem product = viewModel.product;
 
     if (product != null) {
 
@@ -96,7 +91,7 @@ public class ProductDetailActivity
 
 
   @Override
-  public void injectPresenter(ProductDetailContract.Presenter presenter) {
+  public void injectPresenter(MovieDetailContract.Presenter presenter) {
     this.presenter = presenter;
   }
 }

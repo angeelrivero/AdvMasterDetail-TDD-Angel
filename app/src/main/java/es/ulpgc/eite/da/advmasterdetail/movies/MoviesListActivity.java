@@ -1,4 +1,4 @@
-package es.ulpgc.eite.da.advmasterdetail.products;
+package es.ulpgc.eite.da.advmasterdetail.movies;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,19 +9,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import es.ulpgc.eite.da.advmasterdetail.R;
-import es.ulpgc.eite.da.advmasterdetail.data.CategoryItem;
-import es.ulpgc.eite.da.advmasterdetail.data.ProductItem;
-import es.ulpgc.eite.da.advmasterdetail.product.ProductDetailActivity;
+import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
+import es.ulpgc.eite.da.advmasterdetail.movie.MovieDetailActivity;
 
 
-public class ProductListActivity
-    extends AppCompatActivity implements ProductListContract.View {
+public class MoviesListActivity
+    extends AppCompatActivity implements MoviesListContract.View {
 
-  public static String TAG = "AdvMasterDetail.ProductListActivity";
+  public static String TAG = "AdvMasterDetail.MoviesListActivity";
 
-  ProductListContract.Presenter presenter;
+  MoviesListContract.Presenter presenter;
 
-  private ProductListAdapter listAdapter;
+  private MoviesListAdapter listAdapter;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +29,7 @@ public class ProductListActivity
     setTitle(R.string.title_product_list);
 
     // do the setup
-    ProductListScreen.configure(this);
+    MoviesListScreen.configure(this);
 
     initProductListContainer();
 
@@ -66,8 +65,8 @@ public class ProductListActivity
 
   private void initProductListContainer() {
 
-    listAdapter = new ProductListAdapter(view -> {
-      ProductItem item = (ProductItem) view.getTag();
+    listAdapter = new MoviesListAdapter(view -> {
+      MovieItem item = (MovieItem) view.getTag();
       presenter.selectedProductData(item);
     });
 
@@ -78,13 +77,13 @@ public class ProductListActivity
 
   @Override
   public void navigateToProductDetailScreen() {
-    Intent intent = new Intent(this, ProductDetailActivity.class);
+    Intent intent = new Intent(this, MovieDetailActivity.class);
     //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);
   }
 
   @Override
-  public void displayProductListData(final ProductListViewModel viewModel) {
+  public void displayProductListData(final MoviesListViewModel viewModel) {
     Log.e(TAG, "displayProductListData");
 
     runOnUiThread(() -> {
@@ -96,7 +95,7 @@ public class ProductListActivity
   }
 
   @Override
-  public void injectPresenter(ProductListContract.Presenter presenter) {
+  public void injectPresenter(MoviesListContract.Presenter presenter) {
     this.presenter = presenter;
   }
 

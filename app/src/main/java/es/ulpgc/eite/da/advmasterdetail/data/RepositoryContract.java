@@ -9,11 +9,11 @@ public interface RepositoryContract {
   }
 
   interface GetProductListCallback {
-    void setProductList(List<ProductItem> products);
+    void setProductList(List<MovieItem> products);
   }
 
   interface GetProductCallback {
-    void setProduct(ProductItem product);
+    void setProduct(MovieItem product);
   }
 
   interface GetCategoryListCallback {
@@ -55,10 +55,10 @@ public interface RepositoryContract {
   void getCategoryList(CatalogRepository.GetCategoryListCallback callback);
 
   void deleteProduct(
-      ProductItem product, CatalogRepository.DeleteProductCallback callback);
+          MovieItem product, CatalogRepository.DeleteProductCallback callback);
 
   void updateProduct(
-      ProductItem product, CatalogRepository.UpdateProductCallback callback);
+          MovieItem product, CatalogRepository.UpdateProductCallback callback);
 
   void deleteCategory(
       CategoryItem category, CatalogRepository.DeleteCategoryCallback callback);

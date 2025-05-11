@@ -9,7 +9,7 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import es.ulpgc.eite.da.advmasterdetail.data.ProductItem;
+import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
 
 
 @Dao
@@ -17,20 +17,20 @@ public interface ProductDao {
 
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  void insertProduct(ProductItem product);
+  void insertProduct(MovieItem product);
 
   @Update
-  void updateProduct(ProductItem product);
+  void updateProduct(MovieItem product);
 
   @Delete
-  void deleteProduct(ProductItem product);
+  void deleteProduct(MovieItem product);
 
-  @Query("SELECT * FROM products")
-  List<ProductItem> loadProducts();
+  @Query("SELECT * FROM MovieItem")
+  List<MovieItem> loadProducts();
 
-  @Query("SELECT * FROM products WHERE id = :id LIMIT 1")
-  ProductItem loadProduct(int id);
+  @Query("SELECT * FROM MovieItem WHERE id = :id LIMIT 1")
+  MovieItem loadProduct(int id);
 
-  @Query("SELECT * FROM products WHERE category_id=:categoryId")
-  List<ProductItem> loadProducts(final int categoryId);
+  @Query("SELECT * FROM MovieItem WHERE category_id=:categoryId")
+  List<MovieItem> loadProducts(final int categoryId);
 }

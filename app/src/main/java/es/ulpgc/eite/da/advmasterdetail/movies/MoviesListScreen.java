@@ -1,4 +1,4 @@
-package es.ulpgc.eite.da.advmasterdetail.products;
+package es.ulpgc.eite.da.advmasterdetail.movies;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -9,18 +9,18 @@ import es.ulpgc.eite.da.advmasterdetail.data.CatalogRepository;
 import es.ulpgc.eite.da.advmasterdetail.data.RepositoryContract;
 
 
-public class ProductListScreen {
+public class MoviesListScreen {
 
-  public static void configure(ProductListContract.View view) {
+  public static void configure(MoviesListContract.View view) {
 
     WeakReference<FragmentActivity> context =
         new WeakReference<>((FragmentActivity) view);
 
     CatalogMediator mediator = CatalogMediator.getInstance();
-    ProductListContract.Presenter presenter = new ProductListPresenter(mediator);
+    MoviesListContract.Presenter presenter = new MoviesListPresenter(mediator);
 
     RepositoryContract repository = CatalogRepository.getInstance(context.get());
-    ProductListModel model = new ProductListModel(repository);
+    MoviesListModel model = new MoviesListModel(repository);
 
     presenter.injectView(new WeakReference<>(view));
     presenter.injectModel(model);

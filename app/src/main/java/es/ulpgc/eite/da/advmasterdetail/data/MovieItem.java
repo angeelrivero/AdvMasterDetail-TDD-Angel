@@ -18,7 +18,7 @@ import androidx.room.PrimaryKey;
         onDelete = CASCADE
     )
 )
-public class ProductItem {
+public class MovieItem {
 
   @PrimaryKey
   public int id;

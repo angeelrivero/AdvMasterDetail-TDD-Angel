@@ -6,12 +6,12 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".product.ProductDetailActivity">
+    tools:context=".movie.MovieDetailActivity">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".product.ProductDetailActivity">
+        tools:context=".movie.MovieDetailActivity">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

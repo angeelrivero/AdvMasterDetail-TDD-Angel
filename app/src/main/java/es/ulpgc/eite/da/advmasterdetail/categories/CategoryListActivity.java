@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import es.ulpgc.eite.da.advmasterdetail.R;
 import es.ulpgc.eite.da.advmasterdetail.data.CategoryItem;
-import es.ulpgc.eite.da.advmasterdetail.products.ProductListActivity;
+import es.ulpgc.eite.da.advmasterdetail.movies.MoviesListActivity;
 
 
 public class CategoryListActivity
@@ -89,7 +89,7 @@ public class CategoryListActivity
 
   @Override
   public void navigateToProductListScreen() {
-    Intent intent = new Intent(this, ProductListActivity.class);
+    Intent intent = new Intent(this, MoviesListActivity.class);
     //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);
   }
