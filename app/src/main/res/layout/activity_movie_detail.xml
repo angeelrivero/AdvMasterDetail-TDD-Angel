@@ -23,7 +23,7 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp">
+                android:padding="16dp">
 
                 <!-- Imagen del cartel de la película -->
                 <ImageView
@@ -31,20 +31,55 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    tools:src="@tools:sample/avatars"/>
+                    tools:src="@tools:sample/avatars" />
 
-                <!-- Texto con los detalles de la película -->
+                <!-- Título -->
                 <TextView
-                    android:id="@+id/movie_detail"
-                    style="?android:attr/textAppearanceMedium"
+                    android:id="@+id/movie_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:textIsSelectable="false"
-                    tools:text="Aquí se mostrarán los detalles de la película"/>
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:layout_marginTop="16dp"
+                    tools:text="Título: ..." />
+
+                <!-- Año -->
+                <TextView
+                    android:id="@+id/movie_year"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Año: ..." />
+
+                <!-- Duración -->
+                <TextView
+                    android:id="@+id/movie_duration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Duración: ..." />
+
+                <!-- Director -->
+                <TextView
+                    android:id="@+id/movie_director"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Director: ..." />
+
+                <!-- Actores -->
+                <TextView
+                    android:id="@+id/movie_actors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Actores: ..." />
+
+                <!-- Descripción -->
+                <TextView
+                    android:id="@+id/movie_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    tools:text="Sinopsis: ..." />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </ScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
