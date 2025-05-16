@@ -12,4 +12,8 @@
     <string name="sign_up_text">¿No tienes cuenta? Sign Up</string>
     <string name="logo_description">Logo de Películas Retro</string>
 
+    <!-- Strings añadidos para el registro -->
+    <string name="email_hint">Email</string>
+    <string name="repeat_password_hint">Repetir Contraseña</string>
+    <string name="btn_register">Registrarse</string>
 </resources>
