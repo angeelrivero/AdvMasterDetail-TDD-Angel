@@ -12,4 +12,7 @@ public abstract class CatalogDatabase extends RoomDatabase {
   public abstract MovieDao movieDao();
   public abstract UserDao userDao();
 
+  public abstract FavoriteDao favoriteDao();
+
+
 }
