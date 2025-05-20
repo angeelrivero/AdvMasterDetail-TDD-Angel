@@ -1,6 +1,7 @@
 package es.ulpgc.eite.da.advmasterdetail.data;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -29,6 +30,8 @@ public class CatalogRepository implements RepositoryContract {
   public static final String DB_FILE = "catalog.db";
   public static final String JSON_FILE = "catalog.json";
   public static final String JSON_ROOT = "movies";
+  public static final String PREFS_NAME = "app_prefs";
+  public static final String PREF_DB_INITIALIZED = "db_initialized";
 
   private static CatalogRepository INSTANCE;
 
@@ -45,19 +48,48 @@ public class CatalogRepository implements RepositoryContract {
   private CatalogRepository(Context context) {
     this.context = context;
 
+    // Aquí inicializo Room usando databaseBuilder (la base de datos es persistente)
     database = Room.databaseBuilder(
-            context, CatalogDatabase.class, DB_FILE
-    )
-            .fallbackToDestructiveMigration() // Esto permite borrar y recrear la base si cambia la versión
+                    context, CatalogDatabase.class, DB_FILE
+            )
+            .fallbackToDestructiveMigration() // Solo borra si cambio la versión (¡no ocurre si no toco la versión!)
             .build();
+
+    // Al crear el repositorio, lanzo la carga inicial del catálogo si es necesario
+    initializeCatalogIfNeeded();
   }
 
-  // Carga inicial del catálogo desde JSON si la base de datos está vacía
+  /**
+   * Método para cargar películas solo la PRIMERA vez que se inicia la app.
+   * Uso SharedPreferences para guardar un flag y asegurarme de no borrar la base de datos cada vez.
+   */
+  private void initializeCatalogIfNeeded() {
+    SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+    boolean dbInitialized = prefs.getBoolean(PREF_DB_INITIALIZED, false);
+
+    if (!dbInitialized) {
+      // Solo la primera vez borro películas y cargo el JSON (usuarios no se tocan)
+      Log.d(TAG, "Primera ejecución: cargo películas desde JSON.");
+      loadCatalog(true, error -> {
+        if (!error) {
+          // Guardo el flag para no volver a cargar nunca más
+          prefs.edit().putBoolean(PREF_DB_INITIALIZED, true).apply();
+          Log.d(TAG, "Películas cargadas y base de datos marcada como inicializada.");
+        } else {
+          Log.e(TAG, "Error al cargar películas desde JSON en la primera ejecución.");
+        }
+      });
+    }
+  }
+
+  // Carga inicial del catálogo desde JSON solo si la base de datos está vacía o si se indica borrar primero (clearFirst)
   @Override
   public void loadCatalog(final boolean clearFirst, final FetchCatalogDataCallback callback) {
     AsyncTask.execute(() -> {
       if (clearFirst) {
-        database.clearAllTables();
+        // ¡OJO! Solo limpio la tabla de películas, NO la de usuarios (así no borro cuentas)
+        database.movieDao().deleteAllMovies();
+        // database.clearAllTables(); // Nunca llamo a esto para no borrar usuarios
       }
 
       boolean error = false;
@@ -139,8 +171,6 @@ public class CatalogRepository implements RepositoryContract {
 
     return json;
   }
-
-
 
   // Parsear y guardar las películas del JSON en la base de datos
   private boolean loadMoviesFromJSON(String json) {

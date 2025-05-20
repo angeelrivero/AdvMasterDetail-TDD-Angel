@@ -29,8 +29,14 @@ public interface RegisterContract {
     }
 
     interface Model {
-        boolean userExists(String username, String email);
+        interface UserExistsCallback {
+            void onResult(boolean exists);
+        }
+        void userExists(String username, String email, UserExistsCallback callback);
 
-        void saveUser(String username, String email, String password);
+        interface UserSavedCallback {
+            void onSaved();
+        }
+        void saveUser(String username, String email, String password, UserSavedCallback callback);
     }
 }

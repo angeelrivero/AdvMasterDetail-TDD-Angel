@@ -1,7 +1,6 @@
 package es.ulpgc.eite.da.advmasterdetail.register;
 
 import java.lang.ref.WeakReference;
-
 import android.util.Log;
 
 import es.ulpgc.eite.da.advmasterdetail.app.CatalogMediator;
@@ -69,14 +68,17 @@ public class RegisterPresenter implements RegisterContract.Presenter {
             return;
         }
 
-        if (model.userExists(username, email)) {
-            view.get().showValidationError("Este usuario ya existe.");
-            return;
-        }
-
-        // Guardar usuario en la base de datos
-        model.saveUser(username, email, password);
-        view.get().finishRegistration();
+        // Llamada asíncrona para comprobar si existe el usuario
+        model.userExists(username, email, exists -> {
+            if (exists) {
+                view.get().showValidationError("Este usuario ya existe.");
+                return;
+            }
+            // Si no existe, guarda el usuario también asíncrono
+            model.saveUser(username, email, password, () -> {
+                view.get().finishRegistration();
+            });
+        });
     }
 
     @Override

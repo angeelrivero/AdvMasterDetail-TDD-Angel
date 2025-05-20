@@ -18,6 +18,9 @@ public interface UserDao {
     @Query("SELECT * FROM users WHERE email = :email AND password = :password LIMIT 1")
     UserItem findUserByEmailAndPassword(String email, String password);
 
+    @Query("SELECT * FROM users WHERE username = :username AND password = :password LIMIT 1")
+    UserItem findUserByUsernameAndPassword(String username, String password);
+
 
     @Insert
     void insertUser(UserItem user);

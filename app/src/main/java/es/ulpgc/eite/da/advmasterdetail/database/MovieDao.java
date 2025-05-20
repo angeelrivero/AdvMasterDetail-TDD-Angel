@@ -35,8 +35,14 @@ public interface MovieDao {
   @Update
   void updateMovie(MovieItem movie);
 
+
+  @Query("DELETE FROM movie")
+  void deleteAllMovies();
+
   // Elimina una película
   @Delete
   void deleteMovie(MovieItem movie);
+
+
 }
 
