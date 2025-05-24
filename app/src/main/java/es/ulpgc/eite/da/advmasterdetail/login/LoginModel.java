@@ -1,10 +1,8 @@
 package es.ulpgc.eite.da.advmasterdetail.login;
 
 import android.util.Log;
-
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-
 import es.ulpgc.eite.da.advmasterdetail.data.UserRepository;
 import es.ulpgc.eite.da.advmasterdetail.data.UserItem;
 
@@ -24,8 +22,7 @@ public class LoginModel implements LoginContract.Model {
     executor.execute(() -> {
       Log.d(TAG, "Validando usuario en segundo plano...");
       UserItem user = userRepository.getUserByCredentials(username, password);
-      boolean exists = user != null;
-      callback.onResult(exists);
+      callback.onResult(user); // DEVUELVE EL OBJETO UserItem (puede ser null)
     });
   }
 }

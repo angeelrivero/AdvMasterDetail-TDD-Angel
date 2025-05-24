@@ -2,6 +2,7 @@ package es.ulpgc.eite.da.advmasterdetail.database;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Delete;
 
@@ -13,7 +14,7 @@ import es.ulpgc.eite.da.advmasterdetail.data.FavoriteItem;
 public interface FavoriteDao {
 
     // Insertar un favorito
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     void insertFavorite(FavoriteItem favorite);
 
     // Eliminar un favorito (usuario-quita-peli)

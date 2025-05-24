@@ -21,12 +21,10 @@ public class MoviesListModel implements MoviesListContract.Model {
   public void fetchMovieList(final RepositoryContract.GetMovieListCallback callback) {
     Log.d(TAG, "fetchMovieList() desde modelo");
 
-    repository.loadCatalog(true, error -> {
-      Log.d(TAG, "¿Hubo error cargando catálogo?: " + error);
-      repository.getMovieList(movies -> {
-        Log.d(TAG, "Películas cargadas: " + movies.size());
-        callback.setMovieList(movies);
-      });
+    // Cambia aquí: NO cargar el catálogo de nuevo cada vez, solo consultar pelis.
+    repository.getMovieList(movies -> {
+      Log.d(TAG, "Películas cargadas: " + movies.size());
+      callback.setMovieList(movies);
     });
   }
 

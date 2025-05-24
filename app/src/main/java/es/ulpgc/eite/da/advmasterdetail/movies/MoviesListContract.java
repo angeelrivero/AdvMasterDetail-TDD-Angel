@@ -32,6 +32,10 @@ public interface MoviesListContract {
     void onCreateCalled();
     void onRecreateCalled();
     void onPauseCalled();
+    void onDestroyCalled();
+    void onBackButtonPressed();
+
+    void onResumeCalled();
   }
 
   interface Model {

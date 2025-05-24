@@ -10,7 +10,12 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingTop="0dp">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -19,8 +24,8 @@
             app:cardElevation="4dp"
             app:cardCornerRadius="8dp">
 
-            <LinearLayout
-                android:orientation="vertical"
+            <!-- Cambiamos LinearLayout por ConstraintLayout para posicionar la estrella -->
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp">
@@ -28,18 +33,40 @@
                 <!-- Imagen del cartel de la película -->
                 <ImageView
                     android:id="@+id/movie_image"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     tools:src="@tools:sample/avatars" />
+
+                <!-- Botón estrella vacia de favoritos, posicionado arriba a la derecha, justo encima del texto "Duración" -->
+                <ImageButton
+                    android:id="@+id/btn_favorite"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/favorite_button_desc"
+                    android:src="@drawable/ic_star_border"
+                    app:layout_constraintTop_toBottomOf="@id/movie_title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/movie_duration"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    tools:ignore="SpeakableTextPresent" />
 
                 <!-- Título -->
                 <TextView
                     android:id="@+id/movie_title"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="18sp"
+                    app:layout_constraintTop_toBottomOf="@id/movie_image"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btn_favorite"
                     android:layout_marginTop="16dp"
                     tools:text="Título: ..." />
 
@@ -48,6 +75,8 @@
                     android:id="@+id/movie_year"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/movie_title"
+                    android:layout_marginTop="4dp"
                     tools:text="Año: ..." />
 
                 <!-- Duración -->
@@ -55,6 +84,8 @@
                     android:id="@+id/movie_duration"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/movie_year"
+                    android:layout_marginTop="4dp"
                     tools:text="Duración: ..." />
 
                 <!-- Director -->
@@ -62,6 +93,8 @@
                     android:id="@+id/movie_director"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/movie_duration"
+                    android:layout_marginTop="4dp"
                     tools:text="Director: ..." />
 
                 <!-- Actores -->
@@ -69,6 +102,8 @@
                     android:id="@+id/movie_actors"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/movie_director"
+                    android:layout_marginTop="4dp"
                     tools:text="Actores: ..." />
 
                 <!-- Descripción -->
@@ -76,10 +111,14 @@
                     android:id="@+id/movie_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/movie_actors"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     tools:text="Sinopsis: ..." />
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.cardview.widget.CardView>
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

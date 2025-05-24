@@ -1,34 +1,53 @@
 package es.ulpgc.eite.da.advmasterdetail.movie;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestBuilder;
-import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 
 import es.ulpgc.eite.da.advmasterdetail.R;
 import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
 
 public class MovieDetailActivity extends AppCompatActivity implements MovieDetailContract.View {
 
-  public static final String TAG = "MovieDetailActivity";
-
   private MovieDetailContract.Presenter presenter;
+
+  private TextView movieTitleTextView, movieDescriptionTextView, movieDirectorTextView, movieDurationTextView, movieActoresTextView;
+  private ImageButton favoriteButton;
+  private ImageView movieImageView;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_movie_detail); // Asegúrate de tener este layout
-    setTitle(R.string.title_movie_detail); // Agrega en strings.xml
+    setContentView(R.layout.activity_movie_detail);
+    setTitle(R.string.title_movie_detail);
 
     MovieDetailScreen.configure(this);
+
+    movieTitleTextView = findViewById(R.id.movie_title);
+    movieDescriptionTextView = findViewById(R.id.movie_description);
+    movieDirectorTextView = findViewById(R.id.movie_director);
+    movieActoresTextView = findViewById(R.id.movie_actors);
+    movieDurationTextView = findViewById(R.id.movie_duration);
+    movieImageView = findViewById(R.id.movie_image);
+    favoriteButton = findViewById(R.id.btn_favorite);
+
+    // *** ACCESO A AppMediator PARA COMPROBAR SI ESTÁ LOGUEADO ***
+    boolean canFavorite = es.ulpgc.eite.da.advmasterdetail.app.AppMediator.getInstance()
+            .getLoginToMovieListState().loggedWithAccount;
+
+    favoriteButton.setEnabled(canFavorite);  // Esto hace que el botón no sea pulsable
+    favoriteButton.setAlpha(canFavorite ? 1.0f : 0.5f); // Visualmente más gris si está desactivado
+
+    favoriteButton.setOnClickListener(v -> {
+      android.util.Log.d("FavoriteTest", "Click en botón favorito");
+      presenter.toggleFavorite();
+    });
 
     if (savedInstanceState == null) {
       presenter.onCreateCalled();
@@ -36,6 +55,7 @@ public class MovieDetailActivity extends AppCompatActivity implements MovieDetai
       presenter.onRecreateCalled();
     }
   }
+
 
   @Override
   protected void onResume() {
@@ -51,26 +71,29 @@ public class MovieDetailActivity extends AppCompatActivity implements MovieDetai
 
   @Override
   public void displayMovieDetailData(MovieDetailViewModel viewModel) {
-    Log.d(TAG, "displayMovieDetailData");
-
     MovieItem movie = viewModel.movie;
     if (movie != null) {
-      ((TextView) findViewById(R.id.movie_title)).setText("Titulo: " + movie.title);
-      ((TextView) findViewById(R.id.movie_description)).setText("Sinopsis: " +movie.description);
-      ((TextView) findViewById(R.id.movie_director)).setText("Director: " + movie.director);
-      ((TextView) findViewById(R.id.movie_duration)).setText("Duración: " + movie.duration + " min");
+      movieTitleTextView.setText("Título: " + movie.title);
+      movieDescriptionTextView.setText("Sinopsis: " + movie.description);
+      movieDirectorTextView.setText("Director: " + movie.director);
+      movieActoresTextView.setText("Actores: " + movie.actors);
+      movieDurationTextView.setText("Duración: " + movie.duration + " min");
 
-      loadImageFromURL((ImageView) findViewById(R.id.movie_image), movie.posterUrl);
+      loadImageFromURL(movieImageView, movie.posterUrl);
     }
+
+    // Log para ver qué valor está llegando realmente
+    android.util.Log.d("FavoriteTest", "isFavorite: " + viewModel.isFavorite);
+
+    // Cambia aquí el nombre del recurso si lo has renombrado
+    favoriteButton.setImageResource(viewModel.isFavorite ? R.drawable.ic_star_llena : R.drawable.ic_star_border);
   }
 
   private void loadImageFromURL(ImageView imageView, String imageUrl){
-    RequestManager reqManager = Glide.with(imageView.getContext());
-    RequestBuilder reqBuilder = reqManager.load(imageUrl);
-    RequestOptions reqOptions = new RequestOptions();
-    reqOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
-    reqBuilder.apply(reqOptions);
-    reqBuilder.into(imageView);
+    Glide.with(imageView.getContext())
+            .load(imageUrl)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(imageView);
   }
 
   @Override
@@ -78,3 +101,4 @@ public class MovieDetailActivity extends AppCompatActivity implements MovieDetai
     this.presenter = presenter;
   }
 }
+

@@ -5,8 +5,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import androidx.room.Room;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -21,6 +19,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 
+import es.ulpgc.eite.da.advmasterdetail.app.AppMediator;
 import es.ulpgc.eite.da.advmasterdetail.database.CatalogDatabase;
 import es.ulpgc.eite.da.advmasterdetail.database.MovieDao;
 
@@ -48,14 +47,9 @@ public class CatalogRepository implements RepositoryContract {
   private CatalogRepository(Context context) {
     this.context = context;
 
-    // Aquí inicializo Room usando databaseBuilder (la base de datos es persistente)
-    database = Room.databaseBuilder(
-                    context, CatalogDatabase.class, DB_FILE
-            )
-            .fallbackToDestructiveMigration() // Solo borra si cambio la versión (¡no ocurre si no toco la versión!)
-            .build();
+    // *** ¡¡USA SIEMPRE EL SINGLETON DEL MEDIATOR!! ***
+    database = AppMediator.getInstance().getDatabase(context);
 
-    // Al crear el repositorio, lanzo la carga inicial del catálogo si es necesario
     initializeCatalogIfNeeded();
   }
 
@@ -89,7 +83,6 @@ public class CatalogRepository implements RepositoryContract {
       if (clearFirst) {
         // ¡OJO! Solo limpio la tabla de películas, NO la de usuarios (así no borro cuentas)
         database.movieDao().deleteAllMovies();
-        // database.clearAllTables(); // Nunca llamo a esto para no borrar usuarios
       }
 
       boolean error = false;
@@ -204,6 +197,19 @@ public class CatalogRepository implements RepositoryContract {
     }
 
     return false;
+  }
+
+  public CatalogDatabase getDatabase() {
+    return database;
+  }
+
+  public AppMediator getMediator() {
+    return AppMediator.getInstance();
+  }
+
+  @Override
+  public MovieItem getMovieByIdSync(int movieId) {
+    return database.movieDao().loadMovie(movieId);
   }
 
 }

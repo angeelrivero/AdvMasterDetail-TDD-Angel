@@ -3,18 +3,18 @@ package es.ulpgc.eite.da.advmasterdetail.register;
 import java.lang.ref.WeakReference;
 import android.util.Log;
 
-import es.ulpgc.eite.da.advmasterdetail.app.CatalogMediator;
+import es.ulpgc.eite.da.advmasterdetail.app.AppMediator;
 
 public class RegisterPresenter implements RegisterContract.Presenter {
 
     public static final String TAG = "RegisterPresenter";
 
     private WeakReference<RegisterContract.View> view;
-    private CatalogMediator mediator;
+    private AppMediator mediator;
     private RegisterContract.Model model;
     private RegisterState state;
 
-    public RegisterPresenter(CatalogMediator mediator) {
+    public RegisterPresenter(AppMediator mediator) {
         this.mediator = mediator;
     }
 

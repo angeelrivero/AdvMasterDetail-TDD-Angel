@@ -2,6 +2,8 @@ package es.ulpgc.eite.da.advmasterdetail.login;
 
 import java.lang.ref.WeakReference;
 
+import es.ulpgc.eite.da.advmasterdetail.data.UserItem;
+
 public interface LoginContract {
 
     interface View {
@@ -32,7 +34,7 @@ public interface LoginContract {
 
     interface Model {
         interface ValidateUserCallback {
-            void onResult(boolean isValid);
+            void onResult(UserItem user);
         }
         void validateUser(String username, String password, ValidateUserCallback callback);
     }

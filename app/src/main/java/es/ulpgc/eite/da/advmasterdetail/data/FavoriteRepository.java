@@ -26,8 +26,10 @@ public class FavoriteRepository {
 
     // Añadir favorito (usuario marca una película como favorita)
     public void addFavorite(int userId, int movieId, Callback<Void> callback) {
+        android.util.Log.d("FavoriteTest", "addFavorite repo: " + userId + "," + movieId);
         executor.execute(() -> {
             favoriteDao.insertFavorite(new FavoriteItem(userId, movieId));
+            android.util.Log.d("FavoriteTest", "addFavorite insertado en BD: " + userId + "," + movieId);
             if (callback != null) {
                 new Handler(Looper.getMainLooper()).post(() -> callback.onResult(null));
             }
@@ -36,8 +38,10 @@ public class FavoriteRepository {
 
     // Quitar favorito (usuario desmarca una película como favorita)
     public void removeFavorite(int userId, int movieId, Callback<Void> callback) {
+        android.util.Log.d("FavoriteTest", "removeFavorite repo: " + userId + "," + movieId);
         executor.execute(() -> {
             favoriteDao.deleteFavorite(userId, movieId);
+            android.util.Log.d("FavoriteTest", "removeFavorite borrado en BD: " + userId + "," + movieId);
             if (callback != null) {
                 new Handler(Looper.getMainLooper()).post(() -> callback.onResult(null));
             }
@@ -48,6 +52,7 @@ public class FavoriteRepository {
     public void isFavorite(int userId, int movieId, Callback<Boolean> callback) {
         executor.execute(() -> {
             boolean isFav = favoriteDao.isFavorite(userId, movieId);
+            android.util.Log.d("FavoriteRepo", "isFavorite? " + userId + " - " + movieId + " -> " + isFav);
             new Handler(Looper.getMainLooper()).post(() -> callback.onResult(isFav));
         });
     }
@@ -57,6 +62,11 @@ public class FavoriteRepository {
         executor.execute(() -> {
             List<FavoriteItem> favorites = favoriteDao.getFavoritesForUser(userId);
             new Handler(Looper.getMainLooper()).post(() -> callback.onResult(favorites));
+            android.util.Log.d("FavoriteRepo", "getFavoritesForUser: userId=" + userId + " -> encontrado " + favorites.size() + " favoritos");
+            for (FavoriteItem fav : favorites) {
+                android.util.Log.d("FavoriteRepo", "Favorito en BD: userId=" + fav.userId + ", movieId=" + fav.movieId);
+            }
         });
+
     }
 }

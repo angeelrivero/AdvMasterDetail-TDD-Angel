@@ -3,13 +3,17 @@ package es.ulpgc.eite.da.advmasterdetail.movies;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import es.ulpgc.eite.da.advmasterdetail.R;
+import es.ulpgc.eite.da.advmasterdetail.app.AppMediator;
+import es.ulpgc.eite.da.advmasterdetail.app.LoginToMovieListState;
 import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
+import es.ulpgc.eite.da.advmasterdetail.favorites.FavoritesActivity;
 import es.ulpgc.eite.da.advmasterdetail.movie.MovieDetailActivity;
 
 public class MoviesListActivity extends AppCompatActivity implements MoviesListContract.View {
@@ -18,6 +22,7 @@ public class MoviesListActivity extends AppCompatActivity implements MoviesListC
 
   private MoviesListContract.Presenter presenter;
   private MoviesListAdapter listAdapter;
+  private Button buttonFavorites;  // Botón Favoritos
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,24 @@ public class MoviesListActivity extends AppCompatActivity implements MoviesListC
     MoviesListScreen.configure(this); // Inyección de dependencias MVP
 
     initMovieListContainer(); // Prepara RecyclerView
+
+    // Vincula botón favoritos y configura estado
+    buttonFavorites = findViewById(R.id.button_favorites);
+
+    // Obtén el estado guardado que indica el tipo de login
+    LoginToMovieListState loginState = AppMediator.getInstance().getLoginToMovieListState();
+
+    if (loginState != null && loginState.loggedWithAccount) {
+      // Usuario con cuenta: activa botón y añade listener para ir a favoritos
+      buttonFavorites.setEnabled(true);
+      buttonFavorites.setOnClickListener(v -> {
+        Intent intent = new Intent(this, FavoritesActivity.class);
+        startActivity(intent);
+      });
+    } else {
+      // Usuario sin cuenta: desactiva botón
+      buttonFavorites.setEnabled(false);
+    }
 
     if (savedInstanceState == null) {
       presenter.onCreateCalled();

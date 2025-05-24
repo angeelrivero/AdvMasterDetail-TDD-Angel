@@ -16,4 +16,7 @@
     <string name="email_hint">Email</string>
     <string name="repeat_password_hint">Repetir Contraseña</string>
     <string name="btn_register">Registrarse</string>
+
+    <string name="favorite_button_desc">Marcar o desmarcar como favorito</string>
+    <string name="title_favorite_list">Peliculas Favoritas</string>
 </resources>

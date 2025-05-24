@@ -2,6 +2,9 @@ package es.ulpgc.eite.da.advmasterdetail.data;
 
 import java.util.List;
 
+import es.ulpgc.eite.da.advmasterdetail.app.AppMediator;
+import es.ulpgc.eite.da.advmasterdetail.database.CatalogDatabase;
+
 public interface RepositoryContract {
 
   // Callback para saber si la carga inicial del catálogo fue exitosa
@@ -43,4 +46,11 @@ public interface RepositoryContract {
 
   // Actualizar una película
   void updateMovie(MovieItem movie, UpdateMovieCallback callback);
+
+  MovieItem getMovieByIdSync(int movieId);
+
+  AppMediator getMediator();
+
+  CatalogDatabase getDatabase();
+
 }
