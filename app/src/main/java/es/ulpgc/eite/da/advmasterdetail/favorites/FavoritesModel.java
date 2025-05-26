@@ -26,21 +26,23 @@ public class FavoritesModel implements FavoritesContract.Model {
     public void fetchFavorites(int userId, FetchFavoritesCallback callback) {
         Log.d(TAG, "fetchFavorites for userId: " + userId);
 
-        favoriteRepository.getFavoritesForUser(userId, favoriteItems -> {
-            if (favoriteItems == null || favoriteItems.isEmpty()) {
-                callback.onFavoritesFetched(new ArrayList<>());
-                return;
-            }
-
+        // Lanzamos TODO en segundo plano:
+        new Thread(() -> {
             List<MovieItem> favoriteMovies = new ArrayList<>();
-            for (FavoriteItem favorite : favoriteItems) {
-                MovieItem movie = movieRepository.getMovieByIdSync(favorite.movieId);
-                if (movie != null) {
-                    favoriteMovies.add(movie);
+            List<FavoriteItem> favoriteItems = favoriteRepository.getFavoritesForUserSync(userId);
+            if (favoriteItems != null && !favoriteItems.isEmpty()) {
+                for (FavoriteItem favorite : favoriteItems) {
+                    MovieItem movie = movieRepository.getMovieByIdSync(favorite.movieId);
+                    if (movie != null) {
+                        favoriteMovies.add(movie);
+                    }
                 }
             }
 
-            callback.onFavoritesFetched(favoriteMovies);
-        });
+            // Ahora devolvemos el resultado al hilo principal
+            new android.os.Handler(android.os.Looper.getMainLooper()).post(() ->
+                    callback.onFavoritesFetched(favoriteMovies)
+            );
+        }).start();
     }
 }

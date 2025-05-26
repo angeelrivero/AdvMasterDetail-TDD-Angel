@@ -1,5 +1,6 @@
 package es.ulpgc.eite.da.advmasterdetail.favorites;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -72,7 +73,8 @@ public class FavoritesActivity extends AppCompatActivity implements FavoritesCon
 
     @Override
     public void navigateToMovieDetailScreen() {
-        // Navegación a detalle si se quiere implementar
+        Intent intent = new Intent(this, es.ulpgc.eite.da.advmasterdetail.movie.MovieDetailActivity.class);
+        startActivity(intent);
     }
 
     @Override

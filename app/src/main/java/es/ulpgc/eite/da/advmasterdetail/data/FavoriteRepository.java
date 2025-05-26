@@ -9,7 +9,7 @@ import java.util.concurrent.Executors;
 
 import es.ulpgc.eite.da.advmasterdetail.database.FavoriteDao;
 
-// Repositorio de favoritos, encargado de las operaciones asíncronas sobre la tabla de favoritos
+
 public class FavoriteRepository {
 
     private final FavoriteDao favoriteDao;
@@ -69,4 +69,10 @@ public class FavoriteRepository {
         });
 
     }
+
+
+    public List<FavoriteItem> getFavoritesForUserSync(int userId) {
+        return favoriteDao.getFavoritesForUser(userId);
+    }
+
 }

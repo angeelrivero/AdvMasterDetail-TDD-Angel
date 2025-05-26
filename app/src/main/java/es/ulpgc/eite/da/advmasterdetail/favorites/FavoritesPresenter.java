@@ -4,6 +4,7 @@ import java.lang.ref.WeakReference;
 import android.util.Log;
 
 import es.ulpgc.eite.da.advmasterdetail.app.AppMediator;
+import es.ulpgc.eite.da.advmasterdetail.app.FavoriteToMovieDetailState;
 import es.ulpgc.eite.da.advmasterdetail.data.MovieItem;
 
 public class FavoritesPresenter implements FavoritesContract.Presenter {
@@ -40,6 +41,9 @@ public class FavoritesPresenter implements FavoritesContract.Presenter {
   public void onRecreateCalled() {
     Log.d(TAG, "onRecreateCalled()");
     state = mediator.getFavoritesScreenState();
+    if (state == null) {    // <--- PROTEGE SI VIENE A NULL
+      state = new FavoritesState();
+    }
     if (view != null && view.get() != null) {
       FavoritesViewModel vm = new FavoritesViewModel();
       vm.favorites = state.favorites;
@@ -69,6 +73,11 @@ public class FavoritesPresenter implements FavoritesContract.Presenter {
       return;
     }
 
+    // ---- AQUI: INICIALIZA STATE SI ES NULL ----
+    if (state == null) {
+      state = new FavoritesState();
+    }
+
     model.fetchFavorites(userId, favorites -> {
       state.favorites = favorites;
       if (view != null && view.get() != null) {
@@ -82,6 +91,13 @@ public class FavoritesPresenter implements FavoritesContract.Presenter {
   @Override
   public void selectedFavoriteMovieData(MovieItem item) {
     mediator.setSelectedMovie(item);
+
+    // PASA EL ESTADO AL DETALLE (nuevo: FavoriteToMovieDetailState)
+    FavoriteToMovieDetailState toDetail = new FavoriteToMovieDetailState();
+    toDetail.movie = item;
+    toDetail.isFavorite = true; // Si está aquí es porque es favorita
+    mediator.setFavoriteToMovieDetailState(toDetail);
+
     if (view != null && view.get() != null) {
       view.get().navigateToMovieDetailScreen();
     }

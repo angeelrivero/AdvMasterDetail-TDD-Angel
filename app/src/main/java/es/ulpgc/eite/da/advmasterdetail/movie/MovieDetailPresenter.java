@@ -2,6 +2,7 @@ package es.ulpgc.eite.da.advmasterdetail.movie;
 
 import java.lang.ref.WeakReference;
 import es.ulpgc.eite.da.advmasterdetail.app.AppMediator;
+import es.ulpgc.eite.da.advmasterdetail.app.FavoriteToMovieDetailState;
 import es.ulpgc.eite.da.advmasterdetail.app.MovieListToMovieDetailState;
 import es.ulpgc.eite.da.advmasterdetail.app.MovieDetailToMovieListState;
 import es.ulpgc.eite.da.advmasterdetail.data.FavoriteRepository;
@@ -21,6 +22,18 @@ public class MovieDetailPresenter implements MovieDetailContract.Presenter {
   @Override
   public void onCreateCalled() {
     android.util.Log.d("FavoriteTest", "onCreateCalled() en MovieDetailPresenter");
+    // Primero mira si viene desde favoritos
+    FavoriteToMovieDetailState fromFavorites = mediator.getFavoriteToMovieDetailState();
+    if (fromFavorites != null && fromFavorites.movie != null) {
+      state = new MovieDetailState();
+      state.movie = fromFavorites.movie;
+      state.isFavorite = fromFavorites.isFavorite;
+      android.util.Log.d("FavoriteTest", "Recibido de Favoritos: " + state.movie.title + ", isFavorite: " + state.isFavorite);
+      mediator.setFavoriteToMovieDetailState(null); // Limpia el estado para evitar problemas de navegación
+      return;
+    }
+
+
     MovieListToMovieDetailState fromList = mediator.getMovieListToMovieDetailState();
     state = new MovieDetailState();
     if (fromList != null) {
