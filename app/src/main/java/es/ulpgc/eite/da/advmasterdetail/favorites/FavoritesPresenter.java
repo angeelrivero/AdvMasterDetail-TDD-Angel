@@ -64,6 +64,19 @@ public class FavoritesPresenter implements FavoritesContract.Presenter {
   }
 
   @Override
+  public void onBackPressed() {
+    Log.d(TAG, "onBackButtonPressed()");
+    view.get().navigateToPreviousScreen();
+  }
+
+  //Metodo para destruir la pantalla
+  @Override
+  public void onDestroyCalled() {
+    Log.e(TAG, "onDestroyCalled()");
+
+  }
+
+  @Override
   public void fetchFavoritesData() {
     int userId = mediator.getLoginScreenState() != null ? mediator.getLoginScreenState().userId : -1;
     if (userId == -1) {

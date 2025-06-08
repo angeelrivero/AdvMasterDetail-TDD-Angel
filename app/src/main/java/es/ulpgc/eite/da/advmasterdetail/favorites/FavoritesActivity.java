@@ -61,6 +61,12 @@ public class FavoritesActivity extends AppCompatActivity implements FavoritesCon
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.onDestroyCalled();
+    }
+
+    @Override
     public void displayFavoritesData(FavoritesViewModel viewModel) {
         if (viewModel.favorites == null || viewModel.favorites.isEmpty()) {
             Toast.makeText(this, "No tienes películas favoritas aún", Toast.LENGTH_SHORT).show();
@@ -80,5 +86,12 @@ public class FavoritesActivity extends AppCompatActivity implements FavoritesCon
     @Override
     public void injectPresenter(FavoritesContract.Presenter presenter) {
         this.presenter = presenter;
+    }
+
+
+    @Override
+    public void navigateToPreviousScreen() {
+        finish();
+
     }
 }

@@ -79,6 +79,11 @@ public class MovieDetailPresenter implements MovieDetailContract.Presenter {
   public void fetchMovieDetailData() {
     MovieItem movie = getMovieFromState();
     if (movie != null) {
+      //CONVIERTE actorsString en actors antes de mostrar la película
+      if (movie.actors == null && movie.actorsString != null && !movie.actorsString.isEmpty()) {
+        movie.actors = es.ulpgc.eite.da.advmasterdetail.data.Converters.toList(movie.actorsString);
+      }
+
       state.movie = movie;
       FavoriteRepository favoriteRepo = mediator.getFavoriteRepository();
       if (favoriteRepo != null) {
@@ -105,6 +110,7 @@ public class MovieDetailPresenter implements MovieDetailContract.Presenter {
       android.util.Log.d("FavoriteTest", "fetchMovieDetailData() - movie es null");
     }
   }
+
 
   @Override
   public void toggleFavorite() {

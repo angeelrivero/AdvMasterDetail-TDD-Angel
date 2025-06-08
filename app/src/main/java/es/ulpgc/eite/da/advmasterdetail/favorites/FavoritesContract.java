@@ -15,6 +15,8 @@ public interface FavoritesContract {
 
         // Navegar a detalle de película
         void navigateToMovieDetailScreen();
+
+        void navigateToPreviousScreen();
     }
 
     interface Presenter {
@@ -26,6 +28,10 @@ public interface FavoritesContract {
         void onRecreateCalled();
         void onPauseCalled();
         void onResumeCalled();
+
+        void onBackPressed();
+
+        void onDestroyCalled();
 
         // Cargar las películas favoritas
         void fetchFavoritesData();

@@ -19,7 +19,7 @@ public class LoginScreen {
     AppMediator mediator = AppMediator.getInstance();
     LoginContract.Presenter presenter = new LoginPresenter(mediator);
 
-    // Usa siempre el singleton global del Mediator
+    // Uso siempre el singleton global del Mediator
     CatalogDatabase database = mediator.getDatabase(context.get());
 
     UserDao userDao = database.userDao();
@@ -29,8 +29,6 @@ public class LoginScreen {
     FavoriteRepository favoriteRepository = new FavoriteRepository(favoriteDao);
     mediator.setFavoriteRepository(favoriteRepository); // ÚNICA instancia global
 
-    // Puedes crear aquí tu repo de películas si lo usas
-    // mediator.setCatalogRepository(...);
 
     LoginContract.Model model = new LoginModel(userRepository);
     presenter.injectModel(model);

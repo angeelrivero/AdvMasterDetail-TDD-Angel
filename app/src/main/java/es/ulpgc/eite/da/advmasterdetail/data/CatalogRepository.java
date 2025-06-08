@@ -185,8 +185,14 @@ public class CatalogRepository implements RepositoryContract {
         Log.d(TAG, "Películas parseadas correctamente: " + movies.size());
 
         for (MovieItem movie : movies) {
+          // Convierte la lista de actores a un String separado por comas
+          if (movie.actors != null) {
+            movie.actorsString = Converters.fromList(movie.actors);
+          } else {
+            movie.actorsString = "";
+          }
           getMovieDao().insertMovie(movie);
-          Log.d(TAG, "Insertada: " + movie.title);
+          Log.d(TAG, "Insertada: " + movie.title + " | Actores: " + movie.actorsString);
         }
 
         return true;

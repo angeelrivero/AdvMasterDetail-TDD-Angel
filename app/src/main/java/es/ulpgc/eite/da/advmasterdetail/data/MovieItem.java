@@ -25,6 +25,10 @@ public class MovieItem {
   public String description;
   public String posterUrl;
 
-  @Ignore // Le dices a Room que ignore esto
-  public List<String> actors;
+  // Guarda los actores como string (en la base de datos)
+  @ColumnInfo(name = "actors")
+  public String actorsString; // <-- este campo estará en la BD
+
+  @Ignore
+  public List<String> actors; // <-- solo para la app, NO en la BD
 }
